@@ -14,10 +14,10 @@ Run OpenAI ChatGPT using the following code
 
 ```
 export OPENAI_API_KEY=[YOUR_KEY]
-python demo.py OPENAI gpt-3.5-turbo
+python llm_assistant/demo.py OPENAI gpt-3.5-turbo
 ```
 
 Run Ollama Phi using the following code. 
 ```
-python demo.py OLLAMA ollama/phi
+python llm_assistant/demo.py OLLAMA ollama/phi
 ```
