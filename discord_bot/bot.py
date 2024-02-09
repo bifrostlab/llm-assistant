@@ -56,11 +56,6 @@ async def my_long_command_function(ctx: SlashContext):
     required=True,
     opt_type=OptionType.STRING,
     autocomplete=True,
-    choices=[
-        SlashCommandChoice(name="gpt3", value="gpt3"),
-        SlashCommandChoice(name="gpt4", value="gpt4"),
-        SlashCommandChoice(name="g", value="ggggg"),
-    ],
 )
 async def ask_model(ctx: SlashContext, model: str):
     await ctx.send(f"You asked model {model}")
@@ -75,28 +70,16 @@ async def autocomplete(ctx: AutocompleteContext):
 
     # make sure you respond within three seconds
     print(f"waiting...")
+
+    choices = ["gpt3", "gpt4"]
+    filtered_choices = [choice for choice in choices if string_option_input in choice]
+
     await ctx.send(
         choices=[
             {
-                "name": f"gpt3",
-                "value": f"gpt3",
-            },
-            {
-                "name": f"gpt4",
-                "value": f"gpt4",
-            },
-            {
-                "name": f"{string_option_input}a",
-                "value": f"{string_option_input}a",
-            },
-            {
-                "name": f"{string_option_input}b",
-                "value": f"{string_option_input}b",
-            },
-            {
-                "name": f"{string_option_input}c",
-                "value": f"{string_option_input}c",
-            },
+                "name": choice,
+                "value": choice,
+            } for choice in filtered_choices
         ]
     )
 
