@@ -17,19 +17,16 @@ from interactions import (
 vait_guild_id = [1230000000999]  # THIS SHOULD BE ASSIGNED to scopes WHEN DEPLOYED
 
 bot = Client(intents=Intents.DEFAULT)
-# intents are what events we want to receive from discord, `DEFAULT` is usually fine
 
 
-@listen()  # this decorator tells snek that it needs to listen for the corresponding event, and run this coroutine
+@listen()
 async def on_ready():
-    # This event is called when the bot is ready to respond to commands
     print("Ready")
     print(f"This bot is owned by {bot.owner}")
 
 
 @listen()
 async def on_message_create(event):
-    # This event is called when a message is sent in a channel the bot can see
     print(f"message received: {event.message.content}")
 
 
@@ -40,19 +37,15 @@ async def my_short_command(ctx: SlashContext):
 
 @slash_command(name="my_long_command", description="My second command :)")
 async def my_long_command_function(ctx: SlashContext):
-    # need to defer it, otherwise, it fails
-    await ctx.defer()
-
-    # do stuff for a bit
+    await ctx.defer()  # use defer for time-comsuming commands
     await asyncio.sleep(600)
-
     await ctx.send("Hello World")
 
 
 @slash_command(name="ask", description="Ask an LLM")
 @slash_option(
     name="model",
-    description="aaaaa",
+    description="Choose an LLM model",
     required=True,
     opt_type=OptionType.STRING,
     autocomplete=True,
@@ -63,13 +56,10 @@ async def ask_model(ctx: SlashContext, model: str):
 
 @ask_model.autocomplete("model")
 async def autocomplete(ctx: AutocompleteContext):
-    string_option_input = ctx.input_text  # can be empty
+    string_option_input = ctx.input_text  # note: can be empty
     print(f"input: {string_option_input}")
-
     # you can use ctx.kwargs.get("name") to get the current state of other options - note they can be empty too
-
     # make sure you respond within three seconds
-    print(f"waiting...")
 
     choices = ["gpt3", "gpt4"]
     filtered_choices = [choice for choice in choices if string_option_input in choice]
@@ -79,7 +69,8 @@ async def autocomplete(ctx: AutocompleteContext):
             {
                 "name": choice,
                 "value": choice,
-            } for choice in filtered_choices
+            }
+            for choice in filtered_choices
         ]
     )
 
