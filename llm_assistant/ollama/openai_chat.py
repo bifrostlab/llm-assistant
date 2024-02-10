@@ -1,5 +1,6 @@
 from openai import OpenAI
 import argparse
+# Don't need to add the actual api_key here, just use any string value
 client = OpenAI(base_url="http://0.0.0.0:8000", api_key="anything")
 
 if __name__ == "__main__":
