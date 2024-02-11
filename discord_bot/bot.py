@@ -3,10 +3,6 @@ from dotenv import load_dotenv
 import asyncio
 import interactions
 
-# Real VAIT server id to be used and
-# THIS SHOULD BE ASSIGNED to `scopes` WHEN DEPLOYED
-vait_guild_id = [999999999]
-
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
 
