@@ -22,7 +22,7 @@ litellm --config llm_assistant/ollama/proxy_config.yaml
 ```
 
 
-Modify OpenAI SDK to interact with our proxy server instead. In `openai_chat` we use OpenAI API SDK to interact with proxy server. Although the SDK require to have an api key, we **don't need to include it here**. We can use **any string value** for the api key. This is because we are interacting with the proxy server, not the OpenAI server. 
+Modify OpenAI SDK to interact with our proxy server instead. In `openai_chat` we use OpenAI API SDK to interact with proxy server. Although the SDK require to have an api key, we **don't need to include it here**. We can use **any string value** for the api key. This is because we are interacting with the proxy server, not the OpenAI server. Please visit [here](https://github.com/BerriAI/litellm), Section "Quick Start Proxy - CLI" for more information.
 
 ```shell
 python openai_chat.py gpt-3.5-turbo
