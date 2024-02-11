@@ -10,6 +10,7 @@ python = "^3.10"
 litellm = {extras = ["proxy"], version = "^1.23.7"}
 openai = "^1.11.1"
 python-dotenv = "^1.0.1"
+discord-py-interactions = "5.11.0"
 
 
 [build-system]

@@ -347,6 +347,49 @@ files = [
 ]
 
 [[package]]
+name = "discord-py-interactions"
+version = "5.11.0"
+description = "Easy, simple, scalable and modular: a Python API wrapper for interactions."
+optional = false
+python-versions = ">=3.10"
+files = [
+    {file = "discord-py-interactions-5.11.0.tar.gz", hash = "sha256:0f4f0cf97182c7c85dea68123a0a7ac2b4dd5527e4342779865552dce5faf73f"},
+    {file = "discord_py_interactions-5.11.0-py3-none-any.whl", hash = "sha256:ba58247c1b671818105dcb046f824e126118e12889951870ec7b283947c8c013"},
+]
+
+[package.dependencies]
+aiohttp = "*"
+attrs = ">=22.1"
+discord-typings = ">=0.5.1"
+emoji = "*"
+tomli = "*"
+
+[package.extras]
+all = ["Brotli", "PyNaCl (>=1.5.0,<1.6)", "aioconsole (>=0.6.0)", "aiodns", "faust-cchardet", "jurigged", "orjson", "sentry-sdk", "uvloop"]
+console = ["aioconsole (>=0.6.0)"]
+dev = ["Brotli", "PyNaCl (>=1.5.0,<1.6)", "aioconsole (>=0.6.0)", "aiodns", "faust-cchardet", "griffe (==0.25)", "jurigged", "mkdocs-autorefs", "mkdocs-awesome-pages-plugin", "mkdocs-git-committers-plugin-2", "mkdocs-git-revision-date-localized-plugin", "mkdocs-material", "mkdocs-minify-plugin", "mkdocstrings-python", "orjson", "pre-commit", "pytest", "pytest-asyncio", "pytest-cov", "python-dotenv", "sentry-sdk", "typeguard", "uvloop"]
+docs = ["Brotli", "PyNaCl (>=1.5.0,<1.6)", "aioconsole (>=0.6.0)", "aiodns", "faust-cchardet", "griffe (==0.25)", "jurigged", "mkdocs-autorefs", "mkdocs-awesome-pages-plugin", "mkdocs-git-committers-plugin-2", "mkdocs-git-revision-date-localized-plugin", "mkdocs-material", "mkdocs-minify-plugin", "mkdocstrings-python", "orjson", "sentry-sdk", "uvloop"]
+jurigged = ["jurigged"]
+sentry = ["sentry-sdk"]
+speedup = ["Brotli", "aiodns", "faust-cchardet", "orjson", "uvloop"]
+tests = ["pytest", "pytest-asyncio", "pytest-cov", "python-dotenv", "typeguard"]
+voice = ["PyNaCl (>=1.5.0,<1.6)"]
+
+[[package]]
+name = "discord-typings"
+version = "0.7.0"
+description = "Python typings of payloads that Discord sends"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "discord_typings-0.7.0-py3-none-any.whl", hash = "sha256:6c776da9153cde775c93cf744207297e4baec3f805b290216ebd490a86ff3140"},
+    {file = "discord_typings-0.7.0.tar.gz", hash = "sha256:9debd89834d4a6b354d74fa21c527a84fb59454d2d4f0229a3f7d9f7c39f09c3"},
+]
+
+[package.dependencies]
+typing_extensions = ">=4.3,<5"
+
+[[package]]
 name = "distro"
 version = "1.9.0"
 description = "Distro - an OS platform information API"
@@ -1649,6 +1692,17 @@ huggingface_hub = ">=0.16.4,<1.0"
 dev = ["tokenizers[testing]"]
 docs = ["setuptools_rust", "sphinx", "sphinx_rtd_theme"]
 testing = ["black (==22.3)", "datasets", "numpy", "pytest", "requests"]
+
+[[package]]
+name = "tomli"
+version = "2.0.1"
+description = "A lil' TOML parser"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
+    {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
 
 [[package]]
 name = "tqdm"
