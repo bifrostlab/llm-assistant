@@ -29,4 +29,3 @@ python openai_chat.py gpt-3.5-turbo
 python openai_chat.py phi
 ```
 
-
