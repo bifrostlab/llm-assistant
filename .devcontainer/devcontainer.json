@@ -1,6 +1,6 @@
 {
   "name": "Python 3.12",
-  "image": "ghcr.io/bifrostlab/llm-assistant:latest",
+  "image": "ghcr.io/bifrostlab/llm-assistant/devcontainer:latest",
   "customizations": {
     "vscode": {
       "settings": {
