@@ -3,7 +3,7 @@ name: Build and publish devcontainer
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - .devcontainer/Dockerfile
 
