@@ -6,12 +6,15 @@ authors = ["VAIT"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 litellm = {extras = ["proxy"], version = "^1.23.7"}
 openai = "^1.11.1"
 python-dotenv = "^1.0.1"
 discord-py-interactions = "5.11.0"
+
+[tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.1"
+ruff = "^0.2.1"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -48,7 +51,7 @@ exclude = [
 line-length = 88
 indent-width = 4
 
-target-version = "py310"
+target-version = "py312"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
