@@ -17,3 +17,4 @@ repos:
   rev: 1.4.2
   hooks:
     - id: poetry-check
+    - id: poetry-lock
