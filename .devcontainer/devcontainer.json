@@ -1,0 +1,17 @@
+{
+  "name": "Python 3.12",
+  "image": "ghcr.io/bifrostlab/llm-assistant/devcontainer:latest",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoImportCompletions": true
+      },
+      "extensions": [
+        "GitHub.vscode-github-actions",
+        "GitHub.copilot"
+      ]
+    }
+  },
+  "postCreateCommand": "$(pwd)/.devcontainer/post-install.sh"
+}
