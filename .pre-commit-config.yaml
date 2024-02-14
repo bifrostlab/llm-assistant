@@ -1,5 +1,3 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
@@ -19,4 +17,4 @@ repos:
   rev: 1.4.2
   hooks:
     - id: poetry-check
-      language_version: python3.10
+    - id: poetry-lock
