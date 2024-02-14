@@ -13,7 +13,7 @@
         "GitHub.vscode-github-actions",
         "GitHub.copilot",
         "charliermarsh.ruff",
-        "MarkLarah.pre-commit-vscode"
+        "elagil.pre-commit-helper"
       ]
     }
   },

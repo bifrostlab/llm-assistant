@@ -11,11 +11,9 @@ litellm = {extras = ["proxy"], version = "^1.23.7"}
 openai = "^1.11.1"
 python-dotenv = "^1.0.1"
 discord-py-interactions = "5.11.0"
-pre-commit = "^3.6.1"
-ruff = "^0.2.1"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^3.2.2"
+pre-commit = "^3.6.1"
 ruff = "^0.2.1"
 
 [tool.ruff]
@@ -53,7 +51,7 @@ exclude = [
 line-length = 88
 indent-width = 4
 
-target-version = "py310"
+target-version = "py312"
 
 [tool.ruff.lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
