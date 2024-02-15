@@ -9,7 +9,8 @@
       },
       "extensions": [
         "GitHub.vscode-github-actions",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "EditorConfig.EditorConfig"
       ]
     }
   },
