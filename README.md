@@ -34,4 +34,8 @@ exit
 ### Auto formatter for Python
 We use [Ruff](https://github.com/astral-sh/ruff) for linting and code formating. Ruff is already included and installed when you use `poetry install`. Follow the [instructions here](https://github.com/astral-sh/ruff) to use Ruff.
 
-**TL;DR:** just use `ruff check .` (Lint all files in the current directory and any subdirectories) before committing new code.
+**TL;DR:**  
+Just use this (Lint all files in the current directory and any subdirectories) before committing new code.
+```
+ruff check .
+``` 
