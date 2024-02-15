@@ -1,0 +1,21 @@
+name: setup-python-deps
+description: "Setup Python dependencies"
+
+runs:
+    using: composite
+    steps:
+        - name: Install poetry
+          shell: bash
+          run: |
+              pipx install poetry
+
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+              python-version: "3.12"
+              cache: "poetry"
+
+        - name: Install dependencies
+          shell: bash
+          run: poetry install
+

@@ -1,0 +1,46 @@
+name: Test and Lint
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: ./.github/actions/setup-python
+
+            - name: Lint with Ruff
+              run: |
+                  poetry run ruff check .
+
+    format-check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: ./.github/actions/setup-python
+
+            - name: Format check with Ruff
+              run: |
+                  poetry run ruff format --check .
+
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: ./.github/actions/setup-python
+
+            - name: Run pytest
+              run: |
+                  poetry run pytest
