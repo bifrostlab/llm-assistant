@@ -23,6 +23,11 @@ When you’re done working in the virtual environment, simply type:
 exit
 ```
 
+To add missing package to the package list:
+```
+poetry add your_new_package_name
+```
+
 ## Discord Bot Development
 
 ### Getting started
