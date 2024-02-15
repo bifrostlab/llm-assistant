@@ -48,7 +48,7 @@ exclude = [
 ]
 
 # Same as Black.
-line-length = 88
+line-length = 127
 indent-width = 4
 
 target-version = "py312"
