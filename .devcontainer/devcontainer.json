@@ -1,0 +1,22 @@
+{
+  "name": "Python 3.12",
+  "image": "ghcr.io/bifrostlab/llm-assistant/devcontainer:latest",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoImportCompletions": true,
+        "python.editor.formatOnSave": true,
+        "python.editor.defaultFormatter": "charliermarsh.ruff"
+      },
+      "extensions": [
+        "GitHub.vscode-github-actions",
+        "GitHub.copilot",
+        "charliermarsh.ruff",
+        "elagil.pre-commit-helper",
+        "EditorConfig.EditorConfig"
+      ]
+    }
+  },
+  "postCreateCommand": "$(pwd)/.devcontainer/post-install.sh"
+}
