@@ -9,12 +9,11 @@ if __name__ == "__main__":
     parser.add_argument("model")
     args = parser.parse_args()
 
-    response = client.chat.completions.create(model=args.model, messages = [
-        {
-            "role": "user",
-            "content": "write a short poem"
-        }
-    ], stream=True)
+    response = client.chat.completions.create(
+        model=args.model,
+        messages=[{"role": "user", "content": "write a short poem"}],
+        stream=True,
+    )
 
     for chunk in response:
         # print(chunk)
