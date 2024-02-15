@@ -40,7 +40,8 @@ poetry add your_new_package_name
 We use [Ruff](https://github.com/astral-sh/ruff) for linting and code formating. Ruff is already included and installed when you use `poetry install`. Follow the [instructions here](https://github.com/astral-sh/ruff) to use Ruff.
 
 **TL;DR:**  
-Just use this (Lint all files in the current directory and any subdirectories) before committing new code.
+Just use this before committing new code.
 ```
-ruff check .
+ruff check .        # Lint all
+ruff format .       # Format all
 ``` 
