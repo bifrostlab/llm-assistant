@@ -26,9 +26,9 @@ exit
 ## Discord Bot Development
 
 ### Getting started
-- [Create a bot in discord](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/)
+- [Create a bot in discord](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/).
 - Add that bot to a test server.
   - When making the invite through OAuth2 URL Generator, make sure to enable `bot` and `applications.commands` options.
   - Follow the [Invite your bot](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/) section for reference.
-- Copy out `.env.example` into `.env`, and fill in the `DISCORD_BOT_TOKEN` and `DISCORD_GUILD_ID`
-- Now, run the bot code locally and test the bot on your server
+- Copy out `.env.example` into `.env`, and fill in the `DISCORD_BOT_TOKEN` and `DISCORD_GUILD_ID`.
+- Now, run the bot code locally and test the bot on your server.  
