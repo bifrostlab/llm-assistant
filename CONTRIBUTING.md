@@ -30,6 +30,11 @@ LLM-Assistant uses a [devcontainer](https://containers.dev/) to provide a consis
 
 1. [Install Docker](https://docs.docker.com/engine/install/) on your machine if you haven't already.
 2. Install the [Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) in Visual Studio Code.
-3. Open the project folder in [Visual Studio Code](https://code.visualstudio.com/Download).
-4. Click on the green/blue icon in the bottom-left corner of the window and select "Reopen in Container".
-5. Visual Studio Code will automatically build the devcontainer and open a new window with the development environment.
+3. (Optional) If you have yet to obtain a Github personal access token (Classic) with `read:packages` permission. Generate one from: https://github.com/settings/tokens/new?scopes=read:packages
+4. Login to Github Container Registry:
+```bash
+docker login ghcr.io -u $GITHUB_USERNAME -p $PERSONAL_ACCESS_TOKEN
+```
+5. Open the project folder in [Visual Studio Code](https://code.visualstudio.com/Download).
+6. Click on the green/blue icon in the bottom-left corner of the window and select "Reopen in Container".
+7. Visual Studio Code will automatically build the devcontainer and open a new window with the development environment.
