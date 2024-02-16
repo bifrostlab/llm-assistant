@@ -42,6 +42,6 @@ We use [Ruff](https://github.com/astral-sh/ruff) for linting and code formating.
 **TL;DR:**  
 Just use this before committing new code.
 ```
-ruff check .        # Lint all
-ruff format .       # Format all
+poetry run ruff check .        # Lint all
+poetry run ruff format .       # Format all
 ``` 
