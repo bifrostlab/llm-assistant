@@ -50,7 +50,7 @@ exclude = [
 
 # Same as Black.
 line-length = 127
-indent-width = 4
+indent-width = 2
 
 target-version = "py312"
 
