@@ -23,25 +23,12 @@ When you’re done working in the virtual environment, simply type:
 exit
 ```
 
-To add missing package to the package list:
-```
-poetry add your_new_package_name
-```
-
 ## Discord Bot Development
 
 ### Getting started
 - [Create a bot in discord](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/)
-- Create your own discord server, add that bot to a test server (feel free to use )
-- Implement bot logics (and add bot token to your code too)
+- Add that bot to a test server.
+  - When making the invite through OAuth2 URL Generator, make sure to enable `bot` and `applications.commands` options.
+  - Follow the [Invite your bot](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/) section for reference.
+- Copy out `.env.example` into `.env`, and fill in the `DISCORD_BOT_TOKEN` and `DISCORD_GUILD_ID`
 - Now, run the bot code locally and test the bot on your server
-
-### Auto formatter for Python
-We use [Ruff](https://github.com/astral-sh/ruff) for linting and code formating. Ruff is already included and installed when you use `poetry install`. Follow the [instructions here](https://github.com/astral-sh/ruff) to use Ruff.
-
-**TL;DR:**  
-Just use this before committing new code.
-```
-poetry run ruff check .        # Lint all
-poetry run ruff format .       # Format all
-``` 
