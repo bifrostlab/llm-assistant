@@ -38,13 +38,10 @@ async def my_long_command_function(ctx: interactions.SlashContext):
   autocomplete=True,
 )
 @interactions.slash_option(
-  name="prompt",
-  description="Enter your prompt",
-  required=True,
-  opt_type=interactions.OptionType.STRING
+  name="prompt", description="Enter your prompt", required=True, opt_type=interactions.OptionType.STRING
 )
 async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str = ""):
-  await ctx.send(f"You asked model {model} with the prompt: \"{prompt}\"")
+  await ctx.send(f'You asked model {model} with the prompt: "{prompt}"')
 
 
 @ask_model.autocomplete("model")
