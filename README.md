@@ -25,6 +25,13 @@ exit
 
 ## Discord Bot Development
 
+### Start the OLLAMA server
+```
+export OPENAI_API_KEY=<YOUR API KEY>
+litellm --config llm_assistant/ollama/proxy_config.yaml
+```
+For more information, please visit
+
 ### Getting started
 - [Create a bot in discord](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/).
 - Add that bot to a test server.
