@@ -4,6 +4,8 @@ import asyncio
 import interactions
 import ai.qa
 
+MODEL_CHOICES = ["gpt3", "gpt4"]
+
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
 
@@ -37,8 +39,13 @@ async def my_long_command_function(ctx: interactions.SlashContext):
   required=True,
   opt_type=interactions.OptionType.STRING,
   autocomplete=True,
+#   choices=[interactions.SlashCommandChoice(name=model, value=model) for model in MODEL_CHOICES],
 )
 async def ask_model(ctx: interactions.SlashContext, model: str):
+  if model not in MODEL_CHOICES:
+    await ctx.send(f"Invalid model '{model}'. Please choose from {MODEL_CHOICES}.")
+    return
+  
   response = await ai.qa.answer_question(model, "What is the meaning of life?")
   await ctx.send(f"You asked model {model}. Its response is: {response}")
 
@@ -50,8 +57,7 @@ async def autocomplete(ctx: interactions.AutocompleteContext):
   # you can use ctx.kwargs.get("name") to get the current state of other options - note they can be empty too
   # make sure you respond within three seconds
 
-  choices = ["gpt3", "gpt4"]
-  filtered_choices = [choice for choice in choices if string_option_input in choice]
+  filtered_choices = [choice for choice in MODEL_CHOICES if string_option_input in MODEL_CHOICES]
 
   await ctx.send(
     choices=[
