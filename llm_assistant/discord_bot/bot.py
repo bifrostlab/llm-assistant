@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import asyncio
 import interactions
+import ai.qa
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -38,7 +39,8 @@ async def my_long_command_function(ctx: interactions.SlashContext):
   autocomplete=True,
 )
 async def ask_model(ctx: interactions.SlashContext, model: str):
-  await ctx.send(f"You asked model {model}")
+  response = await ai.qa.answer_question(model, "What is the meaning of life?")
+  await ctx.send(f"You asked model {model}. Its response is: {response}")
 
 
 @ask_model.autocomplete("model")
