@@ -43,7 +43,7 @@ async def my_long_command_function(ctx: interactions.SlashContext):
 )
 async def ask_model(ctx: interactions.SlashContext, model: str):
   if model not in MODEL_CHOICES:
-    await ctx.send(f"Invalid model '{model}'. Please choose from {MODEL_CHOICES}.")
+    await ctx.send(f"Invalid model `{model}`. Please choose from `{MODEL_CHOICES}`.")
     return
   
   response = await ai.qa.answer_question(model, "What is the meaning of life?")
