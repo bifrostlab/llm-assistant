@@ -5,7 +5,7 @@ import ai.qa
 import interactions
 from dotenv import load_dotenv
 
-MODEL_CHOICES = ["gpt3", "gpt4"]
+MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -48,8 +48,10 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
   if model not in MODEL_CHOICES:
     await ctx.send(f"Invalid model `{model}`. Please choose from `{MODEL_CHOICES}`.")
     return
-  response = await ai.qa.answer_question(model, "What is the meaning of life?")
-  await ctx.send(f"You asked model {model}. Its response is: {response}")
+  await ctx.defer()
+
+  response = await ai.qa.async_answer_question(model, prompt)
+  await ctx.send(response)
 
 
 @ask_model.autocomplete("model")
