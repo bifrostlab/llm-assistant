@@ -40,7 +40,6 @@ async def my_long_command_function(ctx: interactions.SlashContext):
   required=True,
   opt_type=interactions.OptionType.STRING,
   autocomplete=True,
-  #   choices=[interactions.SlashCommandChoice(name=model, value=model) for model in MODEL_CHOICES],
 )
 @interactions.slash_option(
   name="prompt", description="Enter your prompt", required=True, opt_type=interactions.OptionType.STRING, min_length=10
@@ -60,7 +59,7 @@ async def autocomplete(ctx: interactions.AutocompleteContext):
   # you can use ctx.kwargs.get("name") to get the current state of other options - note they can be empty too
   # make sure you respond within three seconds
 
-  filtered_choices = [choice for choice in MODEL_CHOICES if string_option_input in MODEL_CHOICES]
+  filtered_choices = [choice for choice in MODEL_CHOICES if string_option_input in choice]
 
   await ctx.send(
     choices=[
