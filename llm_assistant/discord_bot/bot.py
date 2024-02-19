@@ -1,8 +1,9 @@
-import os
-from dotenv import load_dotenv
 import asyncio
-import interactions
+import os
+
 import ai.qa
+import interactions
+from dotenv import load_dotenv
 
 MODEL_CHOICES = ["gpt3", "gpt4"]
 
@@ -39,13 +40,15 @@ async def my_long_command_function(ctx: interactions.SlashContext):
   required=True,
   opt_type=interactions.OptionType.STRING,
   autocomplete=True,
-#   choices=[interactions.SlashCommandChoice(name=model, value=model) for model in MODEL_CHOICES],
+  #   choices=[interactions.SlashCommandChoice(name=model, value=model) for model in MODEL_CHOICES],
 )
-async def ask_model(ctx: interactions.SlashContext, model: str):
+@interactions.slash_option(
+  name="prompt", description="Enter your prompt", required=True, opt_type=interactions.OptionType.STRING, min_length=10
+)
+async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str = ""):
   if model not in MODEL_CHOICES:
     await ctx.send(f"Invalid model `{model}`. Please choose from `{MODEL_CHOICES}`.")
     return
-  
   response = await ai.qa.answer_question(model, "What is the meaning of life?")
   await ctx.send(f"You asked model {model}. Its response is: {response}")
 
