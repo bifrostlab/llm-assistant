@@ -1,7 +1,8 @@
-import os
-from dotenv import load_dotenv
 import asyncio
+import os
+
 import interactions
+from dotenv import load_dotenv
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -37,8 +38,11 @@ async def my_long_command_function(ctx: interactions.SlashContext):
   opt_type=interactions.OptionType.STRING,
   autocomplete=True,
 )
-async def ask_model(ctx: interactions.SlashContext, model: str):
-  await ctx.send(f"You asked model {model}")
+@interactions.slash_option(
+  name="prompt", description="Enter your prompt", required=True, opt_type=interactions.OptionType.STRING, min_length=10
+)
+async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str = ""):
+  await ctx.send(f'You asked model {model} with the prompt: "{prompt}"')
 
 
 @ask_model.autocomplete("model")
