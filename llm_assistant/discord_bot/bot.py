@@ -56,7 +56,7 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
 
 @ask_model.autocomplete("model")
 async def autocomplete(ctx: interactions.AutocompleteContext):
-  string_option_input = ctx.input_text  # note: can be empty
+  string_option_input = ctx.input_text  # note: result can be empty
   print(f"input: {string_option_input}")
   # you can use ctx.kwargs.get("name") to get the current state of other options - note they can be empty too
   # make sure you respond within three seconds

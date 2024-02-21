@@ -2,7 +2,7 @@ from openai import OpenAI
 import argparse
 
 # We don't need an actual api_key here. See `ollama/README.md`
-client = OpenAI(base_url="http://0.0.0.0:8000", api_key="FAKE")
+client = OpenAI(base_url="http://localhost:8000", api_key="FAKE")
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
