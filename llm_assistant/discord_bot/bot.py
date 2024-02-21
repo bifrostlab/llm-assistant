@@ -5,7 +5,7 @@ import ai.qa
 import interactions
 from dotenv import load_dotenv
 
-MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
+MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi", "dolphin-phi"]
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -50,7 +50,7 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
     return
   await ctx.defer()
 
-  response = await ai.qa.async_answer_question(model, prompt)
+  response, response_time = await ai.qa.async_answer_question(model, prompt)
   await ctx.send(response)
 
 
