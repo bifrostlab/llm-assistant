@@ -11,8 +11,6 @@ runs:
     - name: Start ollama
       shell: bash
       run: ollama pull tinydolphin
-      with:
-        cache: 
     
     - name: Start litellm
       shell: bash
