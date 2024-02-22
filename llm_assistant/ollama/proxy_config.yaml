@@ -11,7 +11,7 @@ model_list:
   - model_name: dolphin-phi
     litellm_params:
       model: ollama/dolphin-phi
-  - model_name: test:
+  - model_name: test
     litellm_params:
       model: ollama/tinydolphin
 
