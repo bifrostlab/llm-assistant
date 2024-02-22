@@ -11,10 +11,12 @@ runs:
     - name: Start ollama
       shell: bash
       run: ollama pull tinydolphin
+      with:
+        cache: 
     
     - name: Start litellm
       shell: bash
       run: | 
         export OPENAI_API_KEY="none" &&
-        poetry run litellm --config llm_assistant/ollama/proxy_config.yaml
+        poetry run litellm --config llm_assistant/ollama/proxy_config.yaml &
            
