@@ -16,6 +16,7 @@ runs:
       run: curl -fsSL https://ollama.com/install.sh | sh && 
     
     - name: Start ollama
+      if: ${{ steps.cache-ollama.outputs.cache-hit != 'true' }}
       shell: bash
       run: ollama pull tinydolphin
   
