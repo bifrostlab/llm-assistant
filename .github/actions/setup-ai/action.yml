@@ -4,14 +4,23 @@ description: "Setup AI server for testing"
 runs:
   using: composite
   steps:
+    - name: Cache ollama
+      id: cache-ollama
+      uses: actions/cache@v4
+      with:
+        path: ~/.local
+        key: ollama
+
     - name: Install ollama
+      if: steps.cache-ollama.outputs.cache-hit != 'true'
       shell: bash
       run: curl -fsSL https://ollama.com/install.sh | sh
     
     - name: Start ollama
+      if: steps.cache-ollama.outputs.cache-hit != 'true'
       shell: bash
       run: ollama pull tinydolphin
-    
+  
     - name: Start litellm
       shell: bash
       run: | 
