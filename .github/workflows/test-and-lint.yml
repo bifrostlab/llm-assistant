@@ -39,5 +39,8 @@ jobs:
       - name: Set up Python
         uses: ./.github/actions/setup-python
 
+      - name: Set up AI Server
+        uses: ./.github/actions/setup-ai
+
       - name: Run pytest
         run: poetry run pytest

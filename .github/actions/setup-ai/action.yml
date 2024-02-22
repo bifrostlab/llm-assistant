@@ -1,0 +1,14 @@
+name: setup-ai-server
+description: "Setup AI server for testing"
+
+runs:
+  using: composite
+  steps:
+    - name: Start ollama
+      run: ollama pull tinydolphin
+    
+    - name: Start litellm
+      run: | 
+        export OPENAI_API_KEY="none" &&
+        litellm --config llm_assistant/ollama/proxy_config.yaml
+           
