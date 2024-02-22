@@ -20,6 +20,11 @@ runs:
       if: steps.cache-ollama.outputs.cache-hit != 'true'
       shell: bash
       run: ollama pull tinydolphin
+
+    - name: Start cache ollama
+      if: steps.cache-ollama.outputs.cache-hit == 'true'
+      shell: bash
+      run: ollama serve
   
     - name: Start litellm
       shell: bash
