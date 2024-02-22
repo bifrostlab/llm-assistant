@@ -13,7 +13,7 @@ runs:
 
     - name: Install ollama
       shell: bash
-      run: curl -fsSL https://ollama.com/install.sh | sh && 
+      run: curl -fsSL https://ollama.com/install.sh | sh 
     
     - name: Start ollama
       if: ${{ steps.cache-ollama.outputs.cache-hit != 'true' }}
