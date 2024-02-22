@@ -5,12 +5,15 @@ runs:
   using: composite
   steps:
     - name: Start poetry shell
+      shell: bash
       run: poetry shell
 
     - name: Start ollama
+      shell: bash
       run: ollama pull tinydolphin
     
     - name: Start litellm
+      shell: bash
       run: | 
         export OPENAI_API_KEY="none" &&
         litellm --config llm_assistant/ollama/proxy_config.yaml
