@@ -3,7 +3,7 @@ from llm_assistant.discord_bot.ai.qa import async_answer_question
 import time
 
 
-question = "Hello, how are you?"
+question = "Hello, how are you"
 
 
 async def _concurrent_call(model, n):
