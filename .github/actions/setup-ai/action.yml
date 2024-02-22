@@ -16,5 +16,5 @@ runs:
       shell: bash
       run: | 
         export OPENAI_API_KEY="none" &&
-        litellm --config llm_assistant/ollama/proxy_config.yaml
+        poetry run litellm --config llm_assistant/ollama/proxy_config.yaml
            
