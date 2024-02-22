@@ -12,7 +12,6 @@ runs:
         key: ollama
 
     - name: Install ollama
-      if: steps.cache-ollama.outputs.cache-hit != 'true'
       shell: bash
       run: curl -fsSL https://ollama.com/install.sh | sh
     
