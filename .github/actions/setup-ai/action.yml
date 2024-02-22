@@ -8,15 +8,14 @@ runs:
       id: cache-ollama
       uses: actions/cache@v4
       with:
-        path: ~/.local
+        path: ~/.ollama
         key: ollama
 
     - name: Install ollama
       shell: bash
-      run: curl -fsSL https://ollama.com/install.sh | sh
+      run: curl -fsSL https://ollama.com/install.sh | sh && 
     
     - name: Start ollama
-      if: steps.cache-ollama.outputs.cache-hit != 'true'
       shell: bash
       run: ollama pull tinydolphin
   
