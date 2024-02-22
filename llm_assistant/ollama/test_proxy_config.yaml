@@ -1,0 +1,13 @@
+model_list:
+  - model_name: phi
+    litellm_params:
+      model: ollama/phi
+  - model_name: dolphin-phi
+    litellm_params:
+      model: ollama/dolphin-phi
+  - model_name: test
+    litellm_params:
+      model: ollama/tinydolphin
+
+litellm_params:
+  drop_params: True
