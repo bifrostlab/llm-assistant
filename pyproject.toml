@@ -16,6 +16,7 @@ discord-py-interactions = "5.11.0"
 pre-commit = "^3.6.1"
 ruff = "^0.2.1"
 pytest = "^8.0.0"
+litellm = {extras = ["proxy"], version = "^1.26.7"}
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.

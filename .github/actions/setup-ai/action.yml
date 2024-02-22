@@ -7,6 +7,7 @@ runs:
     - name: Install ollama
       shell: bash
       run: curl -fsSL https://ollama.com/install.sh | sh
+    
     - name: Start ollama
       shell: bash
       run: ollama pull tinydolphin
