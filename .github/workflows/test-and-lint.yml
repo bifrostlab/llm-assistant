@@ -3,9 +3,11 @@ name: Test and Lint
 on:
   push:
     branches:
+      - main
       - gh-workflow-ai-test
   pull_request:
     branches:
+      - main
       - gh-workflow-ai-test
 
 jobs:
