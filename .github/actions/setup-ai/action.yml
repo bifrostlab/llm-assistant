@@ -4,6 +4,9 @@ description: "Setup AI server for testing"
 runs:
   using: composite
   steps:
+    - name: Start poetry shell
+      run: poetry shell
+
     - name: Start ollama
       run: ollama pull tinydolphin
     
