@@ -1,8 +1,12 @@
+import os
 from openai import OpenAI
 import argparse
+import dotenv
+dotenv.load_dotenv()
 
 # We don't need an actual api_key here. See `ollama/README.md`
-client = OpenAI(base_url="http://localhost:8000", api_key="FAKE")
+ai_server_url = os.getenv("AI_SERVER_URL")
+client = OpenAI(base_url=ai_server_url, api_key="dont_need_api_key_here")
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

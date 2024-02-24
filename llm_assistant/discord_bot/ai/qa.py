@@ -9,8 +9,8 @@ dotenv.load_dotenv()
 
 async def async_answer_question(model, question):
   start = time.time()
-  ai_server = os.environ.get("AI_SERVER", "http://localhost:8000")
-  client = AsyncOpenAI(base_url=ai_server, api_key="FAKE")
+  ai_server_url = os.getenv("AI_SERVER_URL")
+  client = AsyncOpenAI(base_url=ai_server_url, api_key="FAKE")
   response = await client.chat.completions.create(
     model=model,
     messages=[{"role": "user", "content": question}],
