@@ -3,7 +3,7 @@ from openai import AsyncOpenAI
 import time
 
 
-async def answer_question(model, question, server_url):
+async def answer_question(model: str, question: str, server_url: str):
   start = time.time()
   client = AsyncOpenAI(base_url=server_url, api_key="FAKE")
   response = await client.chat.completions.create(

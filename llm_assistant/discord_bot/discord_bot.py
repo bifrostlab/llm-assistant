@@ -5,8 +5,11 @@ import llm_assistant.discord_bot.qa
 import interactions
 import dotenv
 
+dotenv.load_dotenv()
+
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi", "dolphin-phi"]
 AI_SERVER_URL = os.getenv("AI_SERVER_URL")
+DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -74,5 +77,5 @@ async def autocomplete(ctx: interactions.AutocompleteContext):
   )
 
 
-dotenv.load_dotenv()
-bot.start(os.getenv("DISCORD_BOT_TOKEN"))
+if __name__ == "__main__":
+  bot.start(DISCORD_BOT_TOKEN)
