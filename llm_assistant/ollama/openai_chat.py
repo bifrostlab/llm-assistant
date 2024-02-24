@@ -6,8 +6,8 @@ import dotenv
 dotenv.load_dotenv()
 
 # We don't need an actual api_key here. See `ollama/README.md`
-ai_server_url = os.getenv("AI_SERVER_URL")
-client = OpenAI(base_url=ai_server_url, api_key="dont_need_api_key_here")
+AI_SERVER_URL = os.getenv("AI_SERVER_URL")
+client = OpenAI(base_url=AI_SERVER_URL, api_key="dont_need_api_key_here")
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

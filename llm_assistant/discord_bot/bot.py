@@ -1,11 +1,12 @@
 import asyncio
 import os
 
-import ai.qa
+import llm_assistant.discord_bot.qa
 import interactions
 import dotenv
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi", "dolphin-phi"]
+AI_SERVER_URL = os.getenv("AI_SERVER_URL")
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -50,7 +51,7 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
     return
   await ctx.defer()
 
-  response, response_time = await ai.qa.async_answer_question(model, prompt)
+  response, response_time = await llm_assistant.discord_bot.qa.answer_question(model, prompt, AI_SERVER_URL)
   await ctx.send(response)
 
 
