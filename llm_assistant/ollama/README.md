@@ -21,11 +21,10 @@ export OPENAI_API_KEY=<your_key>
 litellm --config llm_assistant/ollama/proxy_config.yaml
 ```
 
+Modify OpenAI SDK to interact with our proxy server instead. In `openai_chat` we use OpenAI API SDK to interact with proxy server. Although the SDK require to have an api key, we **don't need to include it here**. We can use **any string value** for the api key. This is because we are interacting with the proxy server, not the OpenAI server. Please visit [here (Section "Quick Start Proxy - CLI")](https://github.com/BerriAI/litellm) for more information.
 
-Modify OpenAI SDK to interact with our proxy server instead. In `openai_chat` we use OpenAI API SDK to interact with proxy server. Although the SDK require to have an api key, we **don't need to include it here**. We can use **any string value** for the api key. This is because we are interacting with the proxy server, not the OpenAI server. Please visit [here](https://github.com/BerriAI/litellm), Section "Quick Start Proxy - CLI" for more information.
 
-
-## Make sure it works by running this command
+Check if it works by running these commands with the LiteLLM Proxy **on**. You should receive a response from the bot:  
 ```shell
 python openai_chat.py gpt-3.5-turbo
 python openai_chat.py phi
