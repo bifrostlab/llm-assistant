@@ -2,6 +2,7 @@ import os
 from openai import OpenAI
 import argparse
 import dotenv
+
 dotenv.load_dotenv()
 
 # We don't need an actual api_key here. See `ollama/README.md`

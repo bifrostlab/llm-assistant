@@ -72,5 +72,6 @@ async def autocomplete(ctx: interactions.AutocompleteContext):
     ]
   )
 
+
 dotenv.load_dotenv()
 bot.start(os.getenv("DISCORD_BOT_TOKEN"))
