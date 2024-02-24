@@ -54,7 +54,7 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
     return
   await ctx.defer()
 
-  response, response_time = await llm_assistant.discord_bot.qa.answer_question(model, prompt, AI_SERVER_URL)
+  response = await llm_assistant.discord_bot.qa.answer_question(model, prompt, AI_SERVER_URL)
   await ctx.send(response)
 
 

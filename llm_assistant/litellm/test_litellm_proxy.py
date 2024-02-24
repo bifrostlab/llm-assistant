@@ -13,7 +13,7 @@ async def main():
   parser.add_argument("model")
   args = parser.parse_args()
 
-  response, response_time = await llm_assistant.discord_bot.qa.answer_question(args.model, "write a short poem", AI_SERVER_URL)
+  response = await llm_assistant.discord_bot.qa.answer_question(args.model, "write a short poem", AI_SERVER_URL)
   print(response)
 
 
