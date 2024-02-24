@@ -1,6 +1,5 @@
 import asyncio
 import os
-import openai
 import argparse
 import dotenv
 import llm_assistant.discord_bot.qa
