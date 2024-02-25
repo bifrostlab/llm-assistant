@@ -8,23 +8,23 @@ bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
 
 @interactions.listen()
-async def on_ready():
+async def on_ready() -> None:
   print("Ready")
   print(f"This bot is owned by {bot.owner}")
 
 
 @interactions.listen()
-async def on_message_create(event):
+async def on_message_create(event: interactions.api.events.MessageCreate) -> None:
   print(f"message received: {event.message.content}")
 
 
 @interactions.slash_command(name="my_short_command", description="My first command :)")
-async def my_short_command(ctx: interactions.SlashContext):
+async def my_short_command(ctx: interactions.SlashContext) -> None:
   await ctx.send("Hello World")
 
 
 @interactions.slash_command(name="my_long_command", description="My second command :)")
-async def my_long_command_function(ctx: interactions.SlashContext):
+async def my_long_command_function(ctx: interactions.SlashContext) -> None:
   await ctx.defer()  # use defer for time-comsuming commands
   await asyncio.sleep(600)
   await ctx.send("Hello World")
@@ -41,12 +41,12 @@ async def my_long_command_function(ctx: interactions.SlashContext):
 @interactions.slash_option(
   name="prompt", description="Enter your prompt", required=True, opt_type=interactions.OptionType.STRING, min_length=10
 )
-async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str = ""):
+async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str = "") -> None:
   await ctx.send(f'You asked model {model} with the prompt: "{prompt}"')
 
 
 @ask_model.autocomplete("model")
-async def autocomplete(ctx: interactions.AutocompleteContext):
+async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
   string_option_input = ctx.input_text  # note: can be empty
   print(f"input: {string_option_input}")
   # you can use ctx.kwargs.get("name") to get the current state of other options - note they can be empty too

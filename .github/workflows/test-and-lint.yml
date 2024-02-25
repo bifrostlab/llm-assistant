@@ -41,3 +41,14 @@ jobs:
 
       - name: Run pytest
         run: poetry run pytest
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: ./.github/actions/setup-python
+
+      - name: Typecheck with mypy
+        run: poetry run mypy .
