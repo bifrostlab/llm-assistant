@@ -1,7 +1,9 @@
+import argparse
 import asyncio
 import os
-import argparse
+
 import dotenv
+
 import llm_assistant.discord_bot.qa
 
 dotenv.load_dotenv()
