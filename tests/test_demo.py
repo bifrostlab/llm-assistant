@@ -1,5 +1,2 @@
-# content of test_sample.py
-
-
-def test_demo():
+def test_demo() -> None:
   assert 1 == 1
