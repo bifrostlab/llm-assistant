@@ -8,7 +8,7 @@ import qa
 
 dotenv.load_dotenv()
 
-MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi", "dolphin-phi"]
+MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 AI_SERVER_URL = os.getenv("AI_SERVER_URL")
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 

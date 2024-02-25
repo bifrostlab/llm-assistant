@@ -8,13 +8,10 @@ model_list:
   - model_name: phi
     litellm_params:
       model: ollama/phi
-  - model_name: dolphin-phi
-    litellm_params:
-      model: ollama/dolphin-phi
 
 litellm_params:
   drop_params: True
-  fallbacks: [{"phi": ["gpt-3.5-turbo"], "dolphin-phi": ["gpt-3.5-turbo"]}]
+  fallbacks: [{"phi": ["gpt-3.5-turbo"]}]
 
 router_settings:
   model_group_alias: {
