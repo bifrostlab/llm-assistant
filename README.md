@@ -31,9 +31,9 @@ exit
 ### Start the LiteLLM proxy
 ```
 export OPENAI_API_KEY=<YOUR API KEY>
-litellm --config llm_assistant/ollama/proxy_config.yaml
+litellm --config llm_assistant/litellm/proxy_config.yaml
 ```
-Read more about this LiteLLM proxy [here](./llm_assistant/ollama/README.md).
+Read more about this LiteLLM proxy [here](./llm_assistant/litellm/README.md).
 
 ### Getting started
 
