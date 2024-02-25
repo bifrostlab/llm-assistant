@@ -16,6 +16,7 @@ discord-py-interactions = "5.11.0"
 pre-commit = "^3.6.1"
 ruff = "^0.2.1"
 pytest = "^8.0.0"
+mypy = "^1.8.0"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -71,6 +72,16 @@ quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "lf"
+
+[tool.mypy]
+strict = true
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+show_error_codes = true
+warn_return_any = true
+warn_unused_ignores = true
 
 [build-system]
 requires = ["poetry-core"]
