@@ -80,4 +80,3 @@ async def autocomplete(ctx: interactions.AutocompleteContext):
 
 if __name__ == "__main__":
   bot.start(DISCORD_BOT_TOKEN)
-  bot.start(DISCORD_BOT_TOKEN)
