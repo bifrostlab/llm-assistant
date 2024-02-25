@@ -1,9 +1,10 @@
 import asyncio
 import os
 
-import llm_assistant.discord_bot.qa
-import interactions
 import dotenv
+import interactions
+
+import llm_assistant.discord_bot.qa
 
 dotenv.load_dotenv()
 
@@ -60,7 +61,7 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
 
 @ask_model.autocomplete("model")
 async def autocomplete(ctx: interactions.AutocompleteContext):
-  string_option_input = ctx.input_text  # note: result can be empty
+  string_option_input = ctx.input_text
   # you can use ctx.kwargs.get("name") to get the current state of other options - note they can be empty too
   # make sure you respond within three seconds
 
@@ -78,4 +79,5 @@ async def autocomplete(ctx: interactions.AutocompleteContext):
 
 
 if __name__ == "__main__":
+  bot.start(DISCORD_BOT_TOKEN)
   bot.start(DISCORD_BOT_TOKEN)
