@@ -27,6 +27,6 @@ litellm --config llm_assistant/ollama/proxy_config.yaml
 After starting the LiteLLM Proxy server, run these commands. You should receive a response from the bot:
 
 ```shell
-python tests/test_litellm_proxy.py gpt-3.5-turbo
-python tests/test_litellm_proxy.py phi
+python playgrounds/litellm_proxy.py gpt-3.5-turbo
+python playgrounds/litellm_proxy.py phi
 ```
