@@ -1,8 +1,8 @@
 model_list:
-  - model_name: gpt-3.5-turbo
+  - model_name: gpt3
     litellm_params:
       model: gpt-3.5-turbo
-  - model_name: gpt-4
+  - model_name: gpt4
     litellm_params:
       model: gpt-4
   - model_name: phi
@@ -10,3 +10,11 @@ model_list:
       model: ollama/phi
 litellm_params:
   drop_params: True
+
+litellm_params:
+  drop_params: True
+
+router_settings:
+  routing_strategy: least-busy      # Literal ["simple-shuffle", "least-busy", "usage-based-routing", "latency-based-routing"]
+  num_retries: 2
+  timeout: 60                       # seconds
