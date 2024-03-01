@@ -1,8 +1,8 @@
 model_list:
-  - model_name: gpt3
+  - model_name: gpt-3.5-turbo
     litellm_params:
       model: gpt-3.5-turbo
-  - model_name: gpt4
+  - model_name: gpt-4
     litellm_params:
       model: gpt-4
   - model_name: phi
