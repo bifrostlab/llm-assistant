@@ -1,8 +1,10 @@
 import os
-
 import interactions
-from dotenv import load_dotenv
+import dotenv
 
+dotenv.load_dotenv()
+
+DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
@@ -56,5 +58,5 @@ async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
   )
 
 
-load_dotenv()
-bot.start(os.getenv("DISCORD_BOT_TOKEN"))
+if __name__ == "__main__":
+  bot.start(DISCORD_BOT_TOKEN)
