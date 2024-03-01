@@ -15,3 +15,4 @@ async def answer_question(model: str, question: str, server_url: str):
   out = response.choices[0].message.content
 
   return out
+
