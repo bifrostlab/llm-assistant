@@ -7,7 +7,7 @@ dotenv.load_dotenv()
 
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
-AI_SERVER_URL = os.getenv("AI_SERVER_URL")
+AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 
