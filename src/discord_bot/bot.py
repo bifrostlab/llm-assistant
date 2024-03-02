@@ -9,6 +9,8 @@ DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 AI_SERVER_URL = os.getenv("AI_SERVER_URL")
 
+MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
+
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
 
