@@ -8,8 +8,6 @@ model_list:
   - model_name: phi
     litellm_params:
       model: ollama/phi
-litellm_params:
-  drop_params: True
 
 litellm_params:
   drop_params: True
