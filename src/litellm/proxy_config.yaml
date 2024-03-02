@@ -15,6 +15,5 @@ litellm_params:
   drop_params: True
 
 router_settings:
-  routing_strategy: least-busy      # Literal ["simple-shuffle", "least-busy", "usage-based-routing", "latency-based-routing"]
   num_retries: 2
   timeout: 60                       # seconds
