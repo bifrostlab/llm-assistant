@@ -1,9 +1,13 @@
 import os
-
 import interactions
-from dotenv import load_dotenv
+import dotenv
+import llm
+
+dotenv.load_dotenv()
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
+DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -34,7 +38,11 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
   if model not in MODEL_CHOICES:
     await ctx.send(f"Invalid model `{model}`. Please choose from `{MODEL_CHOICES}`.")
     return
-  await ctx.send(f'You asked model {model} with the prompt: "{prompt}"')
+
+  await ctx.defer()
+
+  response = await llm.answer_question(model, prompt, AI_SERVER_URL)
+  await ctx.send(response)
 
 
 @ask_model.autocomplete("model")
@@ -56,5 +64,5 @@ async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
   )
 
 
-load_dotenv()
-bot.start(os.getenv("DISCORD_BOT_TOKEN"))
+if __name__ == "__main__":
+  bot.start(DISCORD_BOT_TOKEN)
