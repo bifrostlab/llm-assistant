@@ -5,11 +5,9 @@ import llm
 
 dotenv.load_dotenv()
 
+MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
-
-MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
@@ -40,6 +38,8 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
   if model not in MODEL_CHOICES:
     await ctx.send(f"Invalid model `{model}`. Please choose from `{MODEL_CHOICES}`.")
     return
+
+  await ctx.defer()
 
   response = await llm.answer_question(model, prompt, AI_SERVER_URL)
   await ctx.send(response)

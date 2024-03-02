@@ -15,5 +15,5 @@ async def answer_question(model: str, question: str, server_url: str) -> str:
   )
 
   out = response.choices[0].message.content or "No response from the model"
-  
+
   return out
