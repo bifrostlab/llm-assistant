@@ -3,6 +3,7 @@ import time
 import os
 import dotenv
 import pytest
+from typing import List
 from discord_bot.llm import answer_question
 
 AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
@@ -30,7 +31,7 @@ async def test_answer_question__invalid_model() -> None:
 
 
 @pytest.mark.asyncio
-async def test_answer_concurrent_question__should_be_at_the_same_time():
+async def test_answer_concurrent_question__should_be_at_the_same_time() -> None:
   model = "tinydolphin"
   prompt = "Respond shortly: hello"
   n_models = 2
@@ -50,7 +51,7 @@ async def test_answer_concurrent_question__should_be_at_the_same_time():
   ), f"Running {n_models} separately should take more time than running them concurrently"
 
 
-async def _concurrent_call(model, n_models, prompt, server_url):
+async def _concurrent_call(model: str, n_models: int, prompt: str, server_url: str) -> List[str]:
   asyncMethod = []
   for _ in range(n_models):
     asyncMethod.append(answer_question(model, prompt, server_url))
