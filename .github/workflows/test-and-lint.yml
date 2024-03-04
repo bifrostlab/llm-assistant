@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - add-functional-tests-for-discord-bot
   pull_request:
     branches:
       - main
@@ -38,6 +39,9 @@ jobs:
 
       - name: Set up Python
         uses: ./.github/actions/setup-python
+
+      - name: Set up AI server
+        uses: ./.github/actions/setup-ai
 
       - name: Run pytest
         run: poetry run pytest
