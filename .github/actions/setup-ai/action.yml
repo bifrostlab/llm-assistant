@@ -15,5 +15,5 @@ runs:
   
     - name: Start litellm
       shell: bash
-      run: poetry run litellm --config llm_assistant/ollama/test_proxy_config.yaml &
+      run: poetry run litellm --config src/litellm/proxy_config_for_testing.yaml &
            
