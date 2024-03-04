@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - add-functional-tests-for-discord-bot
   pull_request:
     branches:
       - main
