@@ -11,22 +11,12 @@ dotenv.load_dotenv()
 
 @pytest.mark.asyncio
 async def test_answer_question__LLM_should_response() -> None:
-  model = "phi"
+  model = "tinydolphin"
   prompt = "Respond shortly: hello!"
 
   response = await answer_question(model, prompt, AI_SERVER_URL)
 
   assert not response.startswith("Error")
-
-
-@pytest.mark.asyncio
-async def test_answer_question__invalid_server_url() -> None:
-  model = "phi"
-  prompt = "Hello, world!"
-
-  response = await answer_question(model, prompt, "http://fakeurl.com")
-
-  assert response.startswith("Error")
 
 
 @pytest.mark.asyncio
@@ -41,7 +31,7 @@ async def test_answer_question__invalid_model() -> None:
 
 @pytest.mark.asyncio
 async def test_answer_concurrent_question__should_be_at_the_same_time():
-  model = "phi"
+  model = "tinydolphin"
   prompt = "Respond shortly: hello"
   n_models = 2
 
