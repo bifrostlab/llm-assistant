@@ -15,7 +15,7 @@ async def answer_question(model: str, question: str, server_url: str) -> str:
       messages=[{"role": "user", "content": question}],
     )
     out = response.choices[0].message.content or "No response from the model"
-  except Exception as e:
-    out = f"Error: {e}"
 
-  return out
+    return out
+  except Exception as e:
+    return f"Error: {e}"

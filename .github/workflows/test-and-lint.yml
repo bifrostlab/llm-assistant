@@ -43,7 +43,7 @@ jobs:
         uses: ./.github/actions/setup-ai
 
       - name: Run pytest
-        run: poetry run pytest
+        run: poetry run pytest tests/
 
   typecheck:
     runs-on: ubuntu-latest

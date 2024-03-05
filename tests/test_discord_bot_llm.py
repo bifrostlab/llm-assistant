@@ -1,12 +1,11 @@
 import asyncio
 import time
-import os
 import dotenv
 import pytest
 from typing import List
 from discord_bot.llm import answer_question
 
-AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
+AI_SERVER_URL = "http://localhost:8000"
 dotenv.load_dotenv()
 
 
