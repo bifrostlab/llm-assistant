@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12 as build
 
 WORKDIR /usr/app
 
@@ -17,4 +17,15 @@ RUN poetry install --without dev --no-root --no-directory && rm -rf ${POETRY_CAC
 COPY src ./src
 RUN poetry install --without dev
 
-CMD ["poetry", "run", "python", "-m", "src.discord_bot.bot"]
+FROM python:3.12-slim as runtime
+
+WORKDIR /usr/app
+
+ENV VIRTUAL_ENV=/usr/app/.venv \
+    PATH="/usr/app/.venv/bin:$PATH"
+
+COPY --from=build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+
+COPY src ./src
+
+CMD ["python", "src/discord_bot/bot.py"]
