@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["VAIT"]
 readme = "README.md"
+packages = [{include = "discord_bot", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -17,6 +18,8 @@ pre-commit = "^3.6.1"
 ruff = "^0.2.1"
 pytest = "^8.0.0"
 mypy = "^1.8.0"
+pytest-asyncio = "^0.23.5"
+
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -82,6 +85,11 @@ no_implicit_optional = true
 show_error_codes = true
 warn_return_any = true
 warn_unused_ignores = true
+
+# Prevent mypy from trigger the missing import error for our written packages
+[[tool.mypy.overrides]]
+module = ["discord_bot.*", "src.discord_bot.*"]
+ignore_missing_imports = true
 
 [build-system]
 requires = ["poetry-core"]

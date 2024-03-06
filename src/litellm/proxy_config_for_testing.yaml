@@ -1,0 +1,11 @@
+model_list:
+  - model_name: tinydolphin
+    litellm_params:
+      model: ollama/tinydolphin
+
+litellm_params:
+  drop_params: True
+
+router_settings:
+  num_retries: 2
+  timeout: 60                       # seconds

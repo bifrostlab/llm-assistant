@@ -8,12 +8,14 @@ import openai
 
 
 async def answer_question(model: str, question: str, server_url: str) -> str:
-  client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
-  response = await client.chat.completions.create(
-    model=model,
-    messages=[{"role": "user", "content": question}],
-  )
+  try:
+    client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
+    response = await client.chat.completions.create(
+      model=model,
+      messages=[{"role": "user", "content": question}],
+    )
+    out = response.choices[0].message.content or "No response from the model"
 
-  out = response.choices[0].message.content or "No response from the model"
-
-  return out
+    return out
+  except Exception as e:
+    return f"Error: {e}"

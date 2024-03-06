@@ -1,7 +1,7 @@
 import os
 import interactions
 import dotenv
-import llm
+from discord_bot.llm import answer_question
 
 dotenv.load_dotenv()
 
@@ -41,7 +41,7 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
 
   await ctx.defer()
 
-  response = await llm.answer_question(model, prompt, AI_SERVER_URL)
+  response = await answer_question(model, prompt, AI_SERVER_URL)
   await ctx.send(response)
 
 
