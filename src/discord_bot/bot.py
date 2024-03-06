@@ -1,7 +1,7 @@
 import os
 import interactions
 import dotenv
-from src.discord_bot.llm import answer_question
+from discord_bot.llm import answer_question
 
 dotenv.load_dotenv()
 

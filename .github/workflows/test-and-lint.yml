@@ -54,4 +54,4 @@ jobs:
         uses: ./.github/actions/setup-python
 
       - name: Typecheck with mypy
-        run: poetry run mypy . --no-namespace-packages
+        run: poetry run mypy .
