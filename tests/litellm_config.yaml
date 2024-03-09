@@ -1,5 +1,5 @@
 model_list:
-   - model_name: phi # Redirect to tinydolphin for smaller size
+  - model_name: phi # Redirect to tinydolphin for smaller size
     litellm_params:
       model: ollama/tinydolphin
       api_address: http://localhost:11434
