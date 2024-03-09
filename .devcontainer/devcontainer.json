@@ -14,7 +14,8 @@
         "GitHub.copilot",
         "charliermarsh.ruff",
         "elagil.pre-commit-helper",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "ms-python.mypy-type-checker"
       ]
     }
   },
