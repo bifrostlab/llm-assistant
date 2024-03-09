@@ -1,6 +1,6 @@
 import interactions
-from discord_bot.llm import answer_question
-from discord_bot.settings import Settings
+from llm import answer_question
+from settings import Settings
 
 
 settings = Settings()
