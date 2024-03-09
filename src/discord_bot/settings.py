@@ -6,6 +6,3 @@ class Settings(BaseSettings):
 
   DISCORD_BOT_TOKEN: str
   AI_SERVER_URL: str = "http://localhost:8000"
-
-
-settings = Settings()

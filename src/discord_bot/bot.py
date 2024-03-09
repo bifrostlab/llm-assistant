@@ -1,7 +1,9 @@
 import interactions
 from discord_bot.llm import answer_question
-from discord_bot.settings import settings
+from discord_bot.settings import Settings
 
+
+settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 DISCORD_BOT_TOKEN = settings.DISCORD_BOT_TOKEN
 AI_SERVER_URL = settings.AI_SERVER_URL
