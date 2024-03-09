@@ -1,0 +1,12 @@
+model_list:
+  - model_name: tinydolphin
+    litellm_params:
+      model: ollama/tinydolphin
+      api_address: http://localhost:11434
+
+litellm_params:
+  drop_params: True
+
+router_settings:
+  num_retries: 2
+  timeout: 60

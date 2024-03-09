@@ -1,10 +1,14 @@
-name: Build and publish the Ollama test server with Tinydolphin model
+name: Build and publish the Ollama container with Tinydolphin preloaded
 
 on:
- - push
+  push:
+    branches:
+      - main
+    paths:
+      - Dockerfile.test_ollama
 
 jobs:
-  build_dev_container:
+  build_ollama_container:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo

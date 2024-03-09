@@ -31,19 +31,22 @@ jobs:
       - name: Format check with Ruff
         run: poetry run ruff format --check .
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - name: Set up Python
-  #       uses: ./.github/actions/setup-python
+      - name: Set up Python
+        uses: ./.github/actions/setup-python
 
-  #     - name: Set up Ollama server
-  #       run: docker run -d -p 8080:8080 --name ollama ollama/ollama pull
+      - name: Set up Ollama server
+        run: docker run -d -p 11434:11434 --name ollama ghcr.io/bifrostlab/llm-assistant/ollama-tinydolphin-preloaded
 
-  #     - name: Run pytest
-  #       run: poetry run pytest tests/
+      - name: Setup LiteLLM proxy
+        run: docker run -d -p 4000:4000 -v tests/litellm_config.yaml:/app/proxy_server_config.yaml --name litellm ghcr.io/berriai/litellm
+
+      - name: Run pytest
+        run: poetry run pytest tests/
 
   typecheck:
     runs-on: ubuntu-latest
