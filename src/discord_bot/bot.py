@@ -1,13 +1,22 @@
 import os
 import interactions
 import dotenv
+from pydantic import SecretStr, Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from discord_bot.llm import answer_question
 
-dotenv.load_dotenv()
+class Settings(BaseSettings):
+  model_config = SettingsConfigDict(env_file='../../.env', env_file_encoding='utf-8')
 
+  DISCORD_BOT_TOKEN: str
+  DISCORD_GUILD_ID: str
+  AI_SERVER_URL: str = Field(default="http://localhost:8000")
+  OPENAI_API_KEY: str
+
+settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
-DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
+DISCORD_BOT_TOKEN = settings.DISCORD_BOT_TOKEN
+AI_SERVER_URL = settings.AI_SERVER_URL
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
