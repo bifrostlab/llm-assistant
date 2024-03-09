@@ -20,6 +20,8 @@ pytest = "^8.0.0"
 mypy = "^1.8.0"
 pytest-asyncio = "^0.23.5"
 
+[tool.poetry.scripts]
+llm-bot = "discord_bot.bot:main"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
