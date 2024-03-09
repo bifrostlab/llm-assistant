@@ -10,8 +10,6 @@ class Settings(BaseSettings):
   AI_SERVER_URL: str = "http://localhost:8000"
 
 
-# mypy: ignore-errors
-# MyPy requires unecessary named arguments which are automatically imported by pydantic_settings.BaseSettings
 settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 DISCORD_BOT_TOKEN = settings.DISCORD_BOT_TOKEN
