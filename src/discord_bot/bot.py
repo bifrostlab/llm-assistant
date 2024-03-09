@@ -1,7 +1,5 @@
-import os
 import interactions
-import dotenv
-from pydantic import SecretStr, Field
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from discord_bot.llm import answer_question
 
