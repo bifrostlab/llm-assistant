@@ -1,5 +1,5 @@
 model_list:
-  - model_name: tinydolphin
+  - model_name: phi
     litellm_params:
       model: ollama/tinydolphin
 
