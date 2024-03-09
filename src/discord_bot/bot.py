@@ -3,13 +3,15 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from discord_bot.llm import answer_question
 
+
 class Settings(BaseSettings):
-  model_config = SettingsConfigDict(env_file='../../.env', env_file_encoding='utf-8')
+  model_config = SettingsConfigDict(env_file="../../.env", env_file_encoding="utf-8")
 
   DISCORD_BOT_TOKEN: str
   DISCORD_GUILD_ID: str
   AI_SERVER_URL: str = Field(default="http://localhost:8000")
   OPENAI_API_KEY: str
+
 
 settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
