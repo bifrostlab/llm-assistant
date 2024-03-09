@@ -64,7 +64,7 @@ async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
   )
 
 
-def main():
+def main() -> None:
   bot.start(DISCORD_BOT_TOKEN)
 
 
