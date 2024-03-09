@@ -1,5 +1,5 @@
 model_list:
-  - model_name: phi
+  - model_name: phi # Route requests intended for the `phi` model to `tinydolphin` instead since only `phi` option (not `tinydolphin`) is available in `src/discord_bot/bot.py` 
     litellm_params:
       model: ollama/tinydolphin
 
