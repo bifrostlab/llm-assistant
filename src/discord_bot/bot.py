@@ -1,5 +1,4 @@
 import interactions
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from discord_bot.llm import answer_question
 
@@ -8,10 +7,11 @@ class Settings(BaseSettings):
   model_config = SettingsConfigDict(env_file="../../.env", env_file_encoding="utf-8")
 
   DISCORD_BOT_TOKEN: str
-  AI_SERVER_URL: str = Field(default="http://localhost:8000")
+  AI_SERVER_URL: str = "http://localhost:8000"
 
 
-# mypy: ignore-errors
+# mypy: ignore-errors 
+# MyPy requires unecessary named arguments which are automatically imported by pydantic_settings.BaseSettings
 settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 DISCORD_BOT_TOKEN = settings.DISCORD_BOT_TOKEN
