@@ -1,9 +1,7 @@
 name: Build and publish the Ollama test server with Tinydolphin model
 
 on:
-  push:
-    paths:
-      - Dockerfile.test_ollama
+ - push
 
 jobs:
   build_dev_container:
@@ -34,5 +32,5 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/${{ github.repository }}/ollama-tinydolphin-preloaded:test
+            ghcr.io/${{ github.repository }}/ollama-tinydolphin-preloaded:latest
             ghcr.io/${{ github.repository }}/ollama-tinydolphin-preloaded:${{ github.sha }}
