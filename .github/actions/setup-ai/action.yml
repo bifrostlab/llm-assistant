@@ -1,5 +1,5 @@
-name: setup-ai-server
-description: "Setup AI server for testing"
+name: setup-litellm-server
+description: "Setup LiteLLM server for testing"
 
 runs:
   using: composite

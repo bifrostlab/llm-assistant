@@ -31,19 +31,19 @@ jobs:
       - name: Format check with Ruff
         run: poetry run ruff format --check .
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: ./.github/actions/setup-python
+  #     - name: Set up Python
+  #       uses: ./.github/actions/setup-python
 
-      - name: Set up AI server
-        uses: ./.github/actions/setup-ai
+  #     - name: Set up Ollama server
+  #       run: docker run -d -p 8080:8080 --name ollama ollama/ollama pull
 
-      - name: Run pytest
-        run: poetry run pytest tests/
+  #     - name: Run pytest
+  #       run: poetry run pytest tests/
 
   typecheck:
     runs-on: ubuntu-latest

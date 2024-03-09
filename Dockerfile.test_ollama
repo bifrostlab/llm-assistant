@@ -1,0 +1,6 @@
+FROM ollama/ollama
+
+RUN /bin/ollama serve & sleep 2 && /bin/ollama pull tinydolphin
+
+ENTRYPOINT ["/bin/ollama"]
+CMD ["serve"]
