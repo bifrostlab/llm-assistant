@@ -47,8 +47,8 @@ jobs:
       - name: List the docker containers
         run: docker ps
 
-      - name: List hostname and network
-        run: ip a
+      - name: Test the ollama container
+        run: curl http://localhost:11434/api/generate -d '{"model":"tinydolphin","prompt":"Hello, world!","stream":false}'
 
       - name: Set up Python
         uses: ./.github/actions/setup-python
