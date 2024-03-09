@@ -1,4 +1,4 @@
-FROM ollama/ollama
+FROM ollama/ollama:0.1.28
 
 RUN /bin/ollama serve & sleep 2 && /bin/ollama pull tinydolphin
 
