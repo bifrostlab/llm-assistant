@@ -38,15 +38,11 @@ jobs:
         image: ghcr.io/bifrostlab/llm-assistant/ollama-tinydolphin-preloaded
         ports:
           - 11434:11434
-      litellm:
-        image: ghcr.io/berriai/litellm:main-v1.29.1
-        ports:
-          - 4000:4000
-        volumes:
-          - ./tests/setup:/config
-        options: --port 4000 --config /config/config.json
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup LiteLLM proxy
+        run: docker run -d -p 4000:4000 -v ./tests/litellm_config.yaml:/app/proxy_server_config.yaml --name litellm ghcr.io/berriai/litellm:main-v1.29.1
 
       - name: Set up Python
         uses: ./.github/actions/setup-python
