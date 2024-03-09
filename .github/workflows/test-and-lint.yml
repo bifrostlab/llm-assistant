@@ -33,17 +33,22 @@ jobs:
 
   pytest:
     runs-on: ubuntu-latest
+    services:
+      ollama:
+        image: ghcr.io/bifrostlab/llm-assistant/ollama-tinydolphin-preloaded
+        ports:
+          - 11434:11434
+      litellm:
+        image: ghcr.io/berriai/litellm:main-v1.29.1
+        ports:
+          - 4000:4000
+        volumes:
+          - ./tests/litellm_config.yaml:/app/proxy_server_config.yaml
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: ./.github/actions/setup-python
-
-      - name: Set up Ollama server
-        run: docker run -d -p 11434:11434 --name ollama ghcr.io/bifrostlab/llm-assistant/ollama-tinydolphin-preloaded
-
-      - name: Setup LiteLLM proxy
-        run: docker run -d -p 4000:4000 -v ./tests/litellm_config.yaml:/app/proxy_server_config.yaml --name litellm ghcr.io/berriai/litellm:main-v1.29.1
 
       - name: Run pytest
         run: poetry run pytest tests/
