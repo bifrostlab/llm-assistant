@@ -3,10 +3,9 @@ from llm import answer_question
 from settings import Settings
 
 
-settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
-DISCORD_BOT_TOKEN = settings.DISCORD_BOT_TOKEN
-AI_SERVER_URL = settings.AI_SERVER_URL
+DISCORD_BOT_TOKEN = Settings().DISCORD_BOT_TOKEN
+AI_SERVER_URL = Settings().AI_SERVER_URL
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
