@@ -1,16 +1,7 @@
 import interactions
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from discord_bot.llm import answer_question
+from discord_bot.settings import settings
 
-
-class Settings(BaseSettings):
-  model_config = SettingsConfigDict(env_file="../../.env", env_file_encoding="utf-8")
-
-  DISCORD_BOT_TOKEN: str
-  AI_SERVER_URL: str = "http://localhost:8000"
-
-
-settings = Settings()
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
 DISCORD_BOT_TOKEN = settings.DISCORD_BOT_TOKEN
 AI_SERVER_URL = settings.AI_SERVER_URL
