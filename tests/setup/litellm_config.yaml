@@ -2,7 +2,7 @@ model_list:
   - model_name: phi # Redirect to tinydolphin for smaller size
     litellm_params:
       model: ollama/tinydolphin
-      api_base: http://localhost:11434
+      api_base: http://ollama:11434
 
 litellm_params:
   drop_params: True
