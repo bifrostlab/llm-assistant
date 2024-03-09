@@ -5,7 +5,7 @@ import pytest
 from typing import List
 from discord_bot.llm import answer_question
 
-AI_SERVER_URL = "http://localhost:8000"
+AI_SERVER_URL = "http://localhost:4000"
 dotenv.load_dotenv()
 
 
