@@ -64,5 +64,9 @@ async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
   )
 
 
-if __name__ == "__main__":
+def main():
   bot.start(DISCORD_BOT_TOKEN)
+
+
+if __name__ == "__main__":
+  main()

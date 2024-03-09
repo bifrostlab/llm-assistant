@@ -1,6 +1,6 @@
 FROM python:3.12 as build
 
-WORKDIR /usr/app
+WORKDIR /app
 
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
@@ -10,22 +10,16 @@ ENV POETRY_NO_INTERACTION=1 \
 
 RUN pip install poetry==${POETRY_VERSION}
 
-COPY pyproject.toml ./
-COPY poetry.lock ./
-RUN poetry install --without dev --no-root --no-directory && rm -rf ${POETRY_CACHE_DIR}
-
+COPY pyproject.toml poetry.lock ./
 COPY src ./src
-RUN poetry install --without dev
+
+RUN poetry install --compile --without dev
+RUN poetry build && poetry run pip install /app/dist/*.whl
 
 FROM python:3.12-slim as runtime
 
-WORKDIR /usr/app
+COPY --from=build /app/.venv /app/.venv
 
-ENV VIRTUAL_ENV=/usr/app/.venv \
-    PATH="/usr/app/.venv/bin:$PATH"
+ENV PATH="/app/.venv/bin:$PATH"
 
-COPY --from=build ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-
-COPY src ./src
-
-CMD ["python", "src/discord_bot/bot.py"]
+CMD ["llm-bot"]
