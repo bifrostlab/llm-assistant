@@ -34,5 +34,5 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/${{ github.repository }}/ollama:test
-            ghcr.io/${{ github.repository }}/ollama:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/ollama-tinydolphin-preloaded:test
+            ghcr.io/${{ github.repository }}/ollama-tinydolphin-preloaded:${{ github.sha }}
