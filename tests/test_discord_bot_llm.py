@@ -11,7 +11,7 @@ dotenv.load_dotenv()
 
 @pytest.mark.asyncio
 async def test_answer_question__LLM_should_response() -> None:
-  model = "tinydolphin"
+  model = "phi"
   prompt = "Respond shortly: hello!"
 
   response = await answer_question(model, prompt, AI_SERVER_URL)

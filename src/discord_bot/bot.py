@@ -1,13 +1,11 @@
-import os
 import interactions
-import dotenv
-from discord_bot.llm import answer_question
+from llm import answer_question
+from settings import Settings
 
-dotenv.load_dotenv()
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
-DISCORD_BOT_TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-AI_SERVER_URL = os.getenv("AI_SERVER_URL") or "http://localhost:8000"
+DISCORD_BOT_TOKEN = Settings().DISCORD_BOT_TOKEN
+AI_SERVER_URL = Settings().AI_SERVER_URL
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
