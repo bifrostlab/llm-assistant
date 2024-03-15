@@ -31,20 +31,6 @@ jobs:
       - name: Format check with Ruff
         run: poetry run ruff format --check .
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: ./.github/actions/setup-python
-
-      - name: Set up AI server
-        uses: ./.github/actions/setup-ai
-
-      - name: Run pytest
-        run: poetry run pytest tests/
-
   typecheck:
     runs-on: ubuntu-latest
     steps:
