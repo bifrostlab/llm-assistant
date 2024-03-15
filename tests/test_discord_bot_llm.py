@@ -5,7 +5,7 @@ import pytest
 from typing import List
 from discord_bot.llm import answer_question
 
-AI_SERVER_URL = "http://localhost:4000"
+AI_SERVER_URL = "http://localhost:8000"
 dotenv.load_dotenv()
 
 
@@ -31,7 +31,7 @@ async def test_answer_question__invalid_model() -> None:
 
 @pytest.mark.asyncio
 async def test_answer_concurrent_question__should_be_at_the_same_time() -> None:
-  model = "phi"
+  model = "tinydolphin"
   prompt = "Respond shortly: hello"
   n_models = 2
 
