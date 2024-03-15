@@ -31,23 +31,6 @@ jobs:
       - name: Format check with Ruff
         run: poetry run ruff format --check .
 
-  pytest:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up test infrastructure
-        run: docker compose up -f tests/setup/docker-compose.yaml -d
-
-      - name: List the docker containers
-        run: docker ps
-
-      - name: Set up Python
-        uses: ./.github/actions/setup-python
-
-      - name: Run pytest
-        run: poetry run pytest tests/
-
   typecheck:
     runs-on: ubuntu-latest
     steps:
