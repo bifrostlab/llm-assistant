@@ -15,16 +15,16 @@ async def answer_question(model: str, question: str, server_url: str) -> list[st
       messages=[{"role": "user", "content": question}],
     )
     content = response.choices[0].message.content or "No response from the model. Please try again"
-    content = split_answer(content)
-    return content
+    sliced_content = split(content)
+    return sliced_content
 
   except Exception as e:
-    return split_answer(f"Error: {e}")
+    return split(f"Error: {e}")
 
 
-def split_answer(answer: str) -> list[str]:
-  '''
+def split(answer: str) -> list[str]:
+  """
   Split the answer into a list of smaller strings so that
   each element is less than 2000 characters.
-  '''
-  return [answer[i:i + 2000] for i in range(0, len(answer), 2000)]
+  """
+  return [answer[i : i + 2000] for i in range(0, len(answer), 2000)]
