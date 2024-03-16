@@ -8,7 +8,7 @@ DISCORD_BOT_TOKEN = Settings().DISCORD_BOT_TOKEN
 DISCORD_GUILD_ID = Settings().DISCORD_GUILD_ID
 AI_SERVER_URL = Settings().AI_SERVER_URL
 
-bot = interactions.Client(intents=interactions.Intents.DEFAULT, debug_scope=interactions.Snowflake(int(DISCORD_GUILD_ID)))
+bot = interactions.Client(intents=interactions.Intents.DEFAULT, debug_scope=interactions.Snowflake(DISCORD_GUILD_ID))
 
 
 @interactions.listen()
@@ -16,6 +16,7 @@ async def on_ready() -> None:
   print("Ready")
   print(f"This bot is owned by {bot.owner}")
   print(f"Bot is connected to the following guilds: {bot.guilds}")
+  print(f"type: {type(DISCORD_GUILD_ID)} {DISCORD_GUILD_ID}")
 
 
 @interactions.listen()
@@ -23,7 +24,8 @@ async def on_message_create(event: interactions.api.events.MessageCreate) -> Non
   print(f"message received: {event.message.content}")
 
 
-@interactions.slash_command(name="ask", description="Ask an LLM")
+# @interactions.slash_command(name="ask", description="Ask an LLM")
+@interactions.slash_command(name="ask", description="Ask an LLM", scopes=[DISCORD_GUILD_ID])
 @interactions.slash_option(
   name="model",
   description="Choose an LLM model",
