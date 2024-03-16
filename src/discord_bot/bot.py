@@ -24,7 +24,6 @@ async def on_message_create(event: interactions.api.events.MessageCreate) -> Non
   print(f"message received: {event.message.content}")
 
 
-# @interactions.slash_command(name="ask", description="Ask an LLM")
 @interactions.slash_command(name="ask", description="Ask an LLM", scopes=[DISCORD_GUILD_ID])
 @interactions.slash_option(
   name="model",
