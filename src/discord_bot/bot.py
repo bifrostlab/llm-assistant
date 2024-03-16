@@ -16,7 +16,7 @@ async def on_ready() -> None:
   print("Ready")
   print(f"This bot is owned by {bot.owner}")
   print(f"Bot is connected to the following guilds: {bot.guilds}")
-  print(f"type: {type(DISCORD_GUILD_ID)} {DISCORD_GUILD_ID}")
+  print(f"DISCORD_GUILD_ID: {type(DISCORD_GUILD_ID)} {DISCORD_GUILD_ID}")
 
 
 @interactions.listen()
