@@ -40,7 +40,8 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
   await ctx.defer()
 
   response = await answer_question(model, prompt, AI_SERVER_URL)
-  await ctx.send(response)
+  for r in response:
+    await ctx.send(r)
 
 
 @ask_model.autocomplete("model")
