@@ -27,4 +27,17 @@ def split(answer: str) -> list[str]:
   Split the answer into a list of smaller strings so that
   each element is less than 2000 characters.
   """
-  return [answer[i : i + 2000] for i in range(0, len(answer), 2000)]
+  messages = []
+  message = message.strip()
+
+  while len(message) > 2000:
+    last_period = message[:2000].rfind(".")
+    if last_period == -1:
+      last_period = message[:2000].rfind(" ")
+    messages.append(message[: last_period + 1])
+    message = message[last_period + 1 :]
+
+  messages.append(message)
+
+  return messages
+
