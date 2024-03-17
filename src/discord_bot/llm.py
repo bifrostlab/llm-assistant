@@ -41,4 +41,3 @@ def split(answer: str) -> list[str]:
   messages.append(answer)
 
   return messages
-
