@@ -1,19 +1,23 @@
-def message_split(message: str) -> list:
+def message_split(message: str) -> list[str]:
   """
   Split the message into a list of messages of length 2000. With meaningfull sentence
   """
   messages = []
   message = message.strip()
+
   while len(message) > 2000:
     last_period = message[:2000].rfind(".")
     if last_period == -1:
       last_period = message[:2000].rfind(" ")
-    messages.append(message[:last_period+1])
-    message = message[last_period+1:]
+    messages.append(message[: last_period + 1])
+    message = message[last_period + 1 :]
+
   messages.append(message)
+
   return messages
 
-#Test
+
+# Test
 
 message = """
 PwC’s Threat Intelligence team is seeking junior and mid-level threat intelligence analysts who have a passion and aptitude for understanding malicious activity and developing internal and external reporting. We are ideally looking for analysts with a strong background in either technical or strategic intelligence PwC serves more than 200,000 clients in 152 countries, and we use our vantage point as one of the largest international professional services networks to provide global threat intelligence services, tailored and delivered locally to our clients. Our research underpins our security services and is used by public and private sector organisations around the world to protect networks, provide situational awareness and inform strategy. We focus on the identification of novel intrusion techniques and tracking of several hundred threat actors, ranging from organised crime groups to state affiliated espionage actors, originating from more than 27 countries, and we provide: Subscription and bespoke research services to public and private sector intelligence clients globally; Intelligence support to, and collection from incident response and managed threat hunting teams; Insight to our adversary emulation team on novel tools and techniques used by cyber threat actors; and, Access to cutting edge research to inform and underpin all services provided by PwC’s several thousand strong cyber security consulting practice.
@@ -58,7 +62,7 @@ Experience with Maltego, including custom transforms, and its use in mapping out
 Baseline knowledge of threat actors, attribution concepts, and high profile cyber incidents; and
 An understanding or knowledge of related regional geopolitics/wider security landscape.
 
-""" 
+"""
 message = message_split(message)
 len(message)
 message[2]
