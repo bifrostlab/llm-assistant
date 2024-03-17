@@ -26,18 +26,19 @@ def split(answer: str) -> list[str]:
   """
   Split the answer into a list of smaller strings so that
   each element is less than 2000 characters.
+  Full sentences are preserved.
   """
   messages = []
-  message = message.strip()
+  answer = answer.strip()
 
-  while len(message) > 2000:
-    last_period = message[:2000].rfind(".")
+  while len(answer) > 2000:
+    last_period = answer[:2000].rfind(".")
     if last_period == -1:
-      last_period = message[:2000].rfind(" ")
-    messages.append(message[: last_period + 1])
-    message = message[last_period + 1 :]
+      last_period = answer[:2000].rfind(" ")
+    messages.append(answer[: last_period + 1])
+    answer = answer[last_period + 1 :]
 
-  messages.append(message)
+  messages.append(answer)
 
   return messages
 
