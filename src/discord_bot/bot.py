@@ -21,7 +21,7 @@ async def on_ready() -> None:
 
 @interactions.listen()
 async def on_message_create(event: interactions.api.events.MessageCreate) -> None:
-  print(f"message received: {event.message.content}")
+  print(f"Message received: {event.message.content}")
 
 
 @interactions.slash_command(name="ask", description="Ask an LLM", scopes=[DISCORD_GUILD_ID])
@@ -43,7 +43,8 @@ async def ask_model(ctx: interactions.SlashContext, model: str = "", prompt: str
   await ctx.defer()
 
   response = await answer_question(model, prompt, AI_SERVER_URL)
-  await ctx.send(response)
+  for r in response:
+    await ctx.send(r)
 
 
 @ask_model.autocomplete("model")
