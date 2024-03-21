@@ -18,7 +18,7 @@ async def on_ready() -> None:
 
 @interactions.listen()
 async def on_message_create(event: interactions.api.events.MessageCreate) -> None:
-  print(f"message received: {event.message.content}")
+  print(f"Message received: {event.message.content}")
 
 
 @interactions.slash_command(name="ask", description="Ask an LLM")
