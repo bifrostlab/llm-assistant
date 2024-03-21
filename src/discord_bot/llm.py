@@ -8,7 +8,7 @@ import openai
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
-RESERVED_SPACE = 50   # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc. 
+RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
 
 async def answer_question(model: str, question: str, server_url: str) -> list[str]:
@@ -19,10 +19,10 @@ async def answer_question(model: str, question: str, server_url: str) -> list[st
       messages=[{"role": "user", "content": question}],
     )
     content = response.choices[0].message.content or "No response from the model. Please try again"
-    content = split(content)
-    content = add_number(content)
-    content = add_question(content, question)
-    return content
+    messages = split(content)
+    messages = add_number(messages)
+    messages = add_question(messages, question)
+    return messages
 
   except Exception as e:
     return split(f"Error: {e}")
@@ -54,8 +54,7 @@ def add_question(messages: list[str], questions: str) -> list[str]:
   """
   Add the asked question to the beginning of each message.
   """
-  return [(f"Q: {questions[:QUESTION_CUT_OFF_LENGTH]}\n" + \
-           f"A: {message}") for message in messages]
+  return [(f"Q: {questions[:QUESTION_CUT_OFF_LENGTH]}\n" + f"A: {message}") for message in messages]
 
 
 def add_number(messages: list[str]) -> list[str]:
