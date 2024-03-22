@@ -5,6 +5,8 @@ by modifying the `base_url`.
 """
 
 import openai
+import gdown
+import time
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
@@ -16,6 +18,9 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   # Parse PDF
   # Send to LLM
   # Return response
+
+  output_path = f"pdffiles/{time.time()}.pdf"
+  gdown.download(url, output_path, fuzzy=True)
   return ["NOT IMPLEMENTED YET"]
 
 
