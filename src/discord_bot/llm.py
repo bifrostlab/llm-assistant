@@ -30,6 +30,7 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   try:
     output_path = download_pdf(url)
     text = parse_pdf(output_path)
+    os.remove(output_path)
 
     question = (
       "You are a resume reviewer. Your tasks are:\n"
@@ -60,13 +61,12 @@ def download_pdf(url: str) -> str:
 
 def parse_pdf(pdf_path: str) -> str:
   try:
-    downloaded_file = fitz.open(pdf_path)
-    text_list = []
-    for page in downloaded_file:
-      text_list.append(page.get_text())
-    text = "\n\n".join(text_list)
-    downloaded_file.close()
-    os.remove(pdf_path)
+    with fitz.open(pdf_path) as pdf:
+      text_list = []
+      for page in pdf:
+        text_list.append(page.get_text())
+      text = "\n\n".join(text_list)
+
     return text
 
   except Exception as e:
