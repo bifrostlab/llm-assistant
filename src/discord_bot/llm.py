@@ -43,10 +43,10 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
 
     # Parse PDF
     downloaded_file = fitz.open(output_path)
-    text = []
+    text_list = []
     for page in downloaded_file:
-      text.append(page.get_text())
-    text = "\n\n".join(text)
+      text_list.append(page.get_text())
+    text = "\n\n".join(text_list)
     os.remove(output_path)  # Remove the downloaded file
 
     print(f"Parsed content: {text}")
