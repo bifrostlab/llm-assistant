@@ -14,7 +14,7 @@ QUESTION_CUT_OFF_LENGTH = 150
 RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
 
-async def _call_llm(model: str, question: str, server_url: str, is_add_question=True) -> list[str]:
+async def _call_llm(model: str, question: str, server_url: str, is_add_question: bool = True) -> list[str]:
   try:
     client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
     response = await client.chat.completions.create(
