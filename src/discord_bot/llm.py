@@ -36,6 +36,9 @@ async def _call_llm(model: str, question: str, server_url: str, is_add_question=
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   try:
     # Download PDF
+    if not os.path.exists("cache"):
+      os.mkdir("cache")
+
     output_path = f"cache/{time.time()}.pdf"
     os.system(f"poetry run gdown -O {output_path} --fuzzy {url}")
     ## Some how calling gdown inside this function lead to 100% memory utilization
