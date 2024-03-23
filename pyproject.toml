@@ -14,6 +14,7 @@ discord-py-interactions = "5.11.0"
 pydantic-settings = "^2.2.1"
 pydantic = "^2.6.3"
 gdown = "^5.1.0"
+pymupdf = "^1.24.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.1"

@@ -4,9 +4,10 @@ through our LiteLLM proxy to interact with Ollama and OpenAI models
 by modifying the `base_url`.
 """
 
+import os
 import openai
-import gdown
 import time
+import fitz
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
@@ -20,8 +21,21 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   # Return response
 
   output_path = f"pdffiles/{time.time()}.pdf"
-  gdown.download(url, output_path, fuzzy=True)
-  return ["NOT IMPLEMENTED YET"]
+  ## Some how calling gdown inside this function lead to 100% memory utilization
+  # gdown.download(url, output_path, fuzzy=True)
+
+  os.system(f"poetry run gdown -O {output_path} --fuzzy {url}")
+
+  docs = fitz.open(output_path)
+  out_text = []
+  for page in docs:
+    out_text.append(page.get_text())
+  out_text = "\n\n".join(out_text)
+
+  # remove the downloaded file
+  os.remove(output_path)
+
+  return [f"Parsed content: {out_text[:1000]}"]
 
 
 async def answer_question(model: str, question: str, server_url: str) -> list[str]:
