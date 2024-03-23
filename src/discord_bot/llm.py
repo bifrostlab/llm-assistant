@@ -11,6 +11,14 @@ QUESTION_CUT_OFF_LENGTH = 150
 RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
 
+async def review_resume(model: str, url: str, server_url: str) -> list[str]:
+  # Download PDF, handle errors
+  # Parse PDF
+  # Send to LLM
+  # Return response
+  return ["NOT IMPLEMENTED YET"]
+
+
 async def answer_question(model: str, question: str, server_url: str) -> list[str]:
   try:
     client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
