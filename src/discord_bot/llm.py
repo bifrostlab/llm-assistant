@@ -27,10 +27,10 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   os.system(f"poetry run gdown -O {output_path} --fuzzy {url}")
 
   docs = fitz.open(output_path)
-  out_text = []
+  out_text_list = []
   for page in docs:
-    out_text.append(page.get_text())
-  out_text = "\n\n".join(out_text)
+    out_text_list.append(page.get_text())
+  out_text = "\n\n".join(out_text_list)
 
   # remove the downloaded file
   os.remove(output_path)
