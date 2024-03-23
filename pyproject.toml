@@ -94,7 +94,7 @@ warn_unused_ignores = true
 
 # Prevent mypy from trigger the missing import error for our written packages
 [[tool.mypy.overrides]]
-module = ["discord_bot.*", "src.discord_bot.*", "fitz.*"]
+module = []
 ignore_missing_imports = true
 
 [build-system]

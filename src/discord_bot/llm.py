@@ -81,7 +81,7 @@ async def _call_llm(model: str, question: str, server_url: str, attach_question_
   - model (str): The name of the language model to use.
   - question (str): The question to be passed to the language model.
   - server_url (str): The URL of the server hosting the language model.
-  - attach_question (bool, optional): Whether to attach the question to the generated response. 
+  - attach_question (bool, optional): Whether to attach the question to the generated response.
       Defaults to True.
   """
   try:
