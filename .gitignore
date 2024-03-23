@@ -134,7 +134,7 @@ dmypy.json
 cython_debug/
 
 # folder containing temporary test files
-cache
+# cache
 
 # litellm auto generated files
 litellm_uuid.txt
