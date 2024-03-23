@@ -15,27 +15,37 @@ RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `,
 
 
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
-  # Download PDF, handle errors
-  # Parse PDF
-  # Send to LLM
-  # Return response
+  try: 
+    # Download PDF
+    output_path = f"cache/{time.time()}.pdf"
+    os.system(f"poetry run gdown -O {output_path} --fuzzy {url}")
+    ## Some how calling gdown inside this function lead to 100% memory utilization
+    # gdown.download(url, output_path, fuzzy=True)
 
-  output_path = f"pdffiles/{time.time()}.pdf"
-  ## Some how calling gdown inside this function lead to 100% memory utilization
-  # gdown.download(url, output_path, fuzzy=True)
+    # Parse PDF
+    downloaded_file = fitz.open(output_path)
+    text = []
+    for page in downloaded_file:
+      text.append(page.get_text())
+    text = "\n\n".join(text)
+    os.remove(output_path) # Remove the downloaded file
 
-  os.system(f"poetry run gdown -O {output_path} --fuzzy {url}")
+    print(f"Parsed content: {text}")
+    
+    
+    # Send to LLM
+    #
+    # Your implementation here
+    #
+    #
+    #
+    #
 
-  docs = fitz.open(output_path)
-  out_text_list = []
-  for page in docs:
-    out_text_list.append(page.get_text())
-  out_text = "\n\n".join(out_text_list)
 
-  # remove the downloaded file
-  os.remove(output_path)
+    return ["NOT IMPLEMENTED YET"]
+  except Exception as e:
+    return split(f"Error: {e}")
 
-  return [f"Parsed content: {out_text[:1000]}"]
 
 
 async def answer_question(model: str, question: str, server_url: str) -> list[str]:
