@@ -8,13 +8,82 @@ import os
 import openai
 import time
 import fitz
+import gdown
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
 RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
 
-async def _call_llm(model: str, question: str, server_url: str, is_add_question: bool = True) -> list[str]:
+async def answer_question(model: str, question: str, server_url: str) -> list[str]:
+  """
+  Calls the LLM model with the specified question and server URL to get the answer.
+  """
+  try:
+    messages = await _call_llm(model, question, server_url)
+    return messages
+  except Exception as e:
+    return [str(e)]
+
+
+async def review_resume(model: str, url: str, server_url: str) -> list[str]:
+  try:
+    output_path = download_pdf(url)
+    text = parse_pdf(output_path)
+
+    question = (
+      "You are a resume reviewer. Your tasks are:\n"
+      + "- Show sentences with incorrect grammars, and suggest a way to correct them.\n"
+      + "- Provide suggestions to improve the resume: \n\n"
+      + f"{text}"
+    )
+
+    messages = await _call_llm(model, question, server_url, attach_question_to_message=False)
+    return messages
+  except Exception as e:
+    return [str(e)]
+
+
+def download_pdf(url: str) -> str:
+  try:
+    if not os.path.exists("cache"):
+      os.mkdir("cache")
+
+    output_path = f"cache/{time.time()}.pdf"
+    gdown.download(url, output_path, fuzzy=True)
+
+    return output_path
+
+  except Exception as e:
+    raise RuntimeError(f"Error in downloading PDF: {e}")
+
+
+def parse_pdf(pdf_path: str) -> str:
+  try:
+    downloaded_file = fitz.open(pdf_path)
+    text_list = []
+    for page in downloaded_file:
+      text_list.append(page.get_text())
+    text = "\n\n".join(text_list)
+    downloaded_file.close()
+    os.remove(pdf_path)
+    return text
+
+  except Exception as e:
+    raise RuntimeError(f"Error in parsing PDF: {e}")
+
+
+async def _call_llm(model: str, question: str, server_url: str, attach_question_to_message: bool = True) -> list[str]:
+  """
+  Calls the Language Model (LLM) to generate a response based on the given question.
+
+  Args:
+  - model (str): The name of the language model to use.
+  - question (str): The question to be passed to the language model.
+  - server_url (str): The URL of the server hosting the language model.
+  - attach_question (bool, optional): Whether to attach the question to the generated response. 
+      Defaults to True.
+  """
   try:
     client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
     response = await client.chat.completions.create(
@@ -24,45 +93,13 @@ async def _call_llm(model: str, question: str, server_url: str, is_add_question:
     content = response.choices[0].message.content or "No response from the model. Please try again"
     messages = split(content)
     messages = add_number(messages)
-    if is_add_question:
+    if attach_question_to_message:
       messages = add_question(messages, question)
 
     return messages
 
   except Exception as e:
-    return split(f"Error: {e}")
-
-
-async def review_resume(model: str, url: str, server_url: str) -> list[str]:
-  try:
-    # Download PDF
-    if not os.path.exists("cache"):
-      os.mkdir("cache")
-
-    output_path = f"cache/{time.time()}.pdf"
-    os.system(f"poetry run gdown -O {output_path} --fuzzy {url}")
-    ## Some how calling gdown inside this function lead to 100% memory utilization
-    # gdown.download(url, output_path, fuzzy=True)
-
-    # Parse PDF
-    downloaded_file = fitz.open(output_path)
-    text_list = []
-    for page in downloaded_file:
-      text_list.append(page.get_text())
-    text = "\n\n".join(text_list)
-    os.remove(output_path)  # Remove the downloaded file
-
-    print(f"Parsed content: {text}")
-
-    question = f"You are a resume reviewer. Your tasks are:\n- Show sentences with incorrect grammars, and suggest a way to correct them.\n- Provide suggestions to improve the resume: \n\n{text}"
-
-    return await _call_llm(model, question, server_url, is_add_question=False)
-  except Exception as e:
-    return split(f"Error: {e}")
-
-
-async def answer_question(model: str, question: str, server_url: str) -> list[str]:
-  return await _call_llm(model, question, server_url, is_add_question=True)
+    raise RuntimeError(f"Error in calling the LLM: {e}")
 
 
 def split(answer: str) -> list[str]:
