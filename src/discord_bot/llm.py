@@ -8,9 +8,7 @@ import os
 import openai
 import time
 import fitz
-from settings import Settings
 
-app_settings = Settings()
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
 RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
@@ -18,7 +16,7 @@ RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `,
 
 async def _call_llm(model: str, question: str, server_url: str, is_add_question: bool = True) -> list[str]:
   try:
-    client = openai.AsyncOpenAI(base_url=server_url, api_key=app_settings.API_KEY)
+    client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
     response = await client.chat.completions.create(
       model=model,
       messages=[{"role": "user", "content": question}],

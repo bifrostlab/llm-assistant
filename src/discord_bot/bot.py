@@ -3,11 +3,11 @@ import re
 import llm
 from settings import Settings
 
-app_settings = Settings()
-MODEL_CHOICES = app_settings.MODEL_CHOICES
-DEFAULT_MODEL = app_settings.DEFAULT_MODEL
-DISCORD_BOT_TOKEN = app_settings.DISCORD_BOT_TOKEN
-AI_SERVER_URL = app_settings.AI_SERVER_URL
+
+MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
+DEFAULT_MODEL = MODEL_CHOICES[0]
+DISCORD_BOT_TOKEN = Settings().DISCORD_BOT_TOKEN
+AI_SERVER_URL = Settings().AI_SERVER_URL
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
