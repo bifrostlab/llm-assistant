@@ -6,74 +6,17 @@ by modifying the `base_url`.
 
 import os
 import openai
-import time
-import fitz
-import gdown
+import utils.pdf
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
 RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
 
-async def answer_question(model: str, question: str, server_url: str) -> list[str]:
+async def answer_question(model: str, question: str, server_url: str, attach_question_to_message: bool = True) -> list[str]:
   """
   Calls the LLM model with the specified question and server URL to get the answer.
   """
-  try:
-    messages = await _call_llm(model, question, server_url)
-    return messages
-  except Exception as e:
-    return [str(e)]
-
-
-async def review_resume(model: str, url: str, server_url: str) -> list[str]:
-  try:
-    output_path = download_pdf(url)
-    text = parse_pdf(output_path)
-    os.remove(output_path)
-
-    question = (
-      "You are a resume reviewer. Your tasks are:\n"
-      + "- Show sentences with incorrect grammars, and suggest a way to correct them.\n"
-      + "- Provide suggestions to improve the resume: \n\n"
-      + f"{text}"
-    )
-
-    messages = await _call_llm(model, question, server_url, attach_question_to_message=False)
-    return messages
-  except Exception as e:
-    return [str(e)]
-
-
-def download_pdf(url: str) -> str:
-  try:
-    if not os.path.exists("cache"):
-      os.mkdir("cache")
-
-    output_path = f"cache/{time.time()}.pdf"
-    gdown.download(url, output_path, fuzzy=True)
-
-    return output_path
-
-  except Exception as e:
-    raise RuntimeError(f"Error in downloading PDF: {e}")
-
-
-def parse_pdf(pdf_path: str) -> str:
-  try:
-    with fitz.open(pdf_path) as pdf:
-      text_list = []
-      for page in pdf:
-        text_list.append(page.get_text())
-      text = "\n\n".join(text_list)
-
-    return text
-
-  except Exception as e:
-    raise RuntimeError(f"Error in parsing PDF: {e}")
-
-
-async def _call_llm(model: str, question: str, server_url: str, attach_question_to_message: bool = True) -> list[str]:
   try:
     client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
     response = await client.chat.completions.create(
@@ -89,7 +32,26 @@ async def _call_llm(model: str, question: str, server_url: str, attach_question_
     return messages
 
   except Exception as e:
-    raise RuntimeError(f"Error in calling the LLM: {e}")
+    return split(f"Error in calling the LLM: {e}")
+
+
+async def review_resume(model: str, url: str, server_url: str) -> list[str]:
+  try:
+    output_path = utils.pdf.download_pdf(url)
+    text = utils.pdf.parse_pdf(output_path)
+    os.remove(output_path)
+  except Exception as e:
+    return split(str(e))
+
+  question = (
+    "You are a resume reviewer. Your tasks are:\n"
+    + "- Show sentences with incorrect grammars, and suggest a way to correct them.\n"
+    + "- Provide suggestions to improve the resume: \n\n"
+    + f"{text}"
+  )
+
+  messages = await answer_question(model, question, server_url, attach_question_to_message=False)
+  return messages
 
 
 def split(answer: str) -> list[str]:
