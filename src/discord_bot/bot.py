@@ -5,7 +5,7 @@ from discord_bot.settings import Settings
 
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
-DEFAULT_MODEL = MODEL_CHOICES[2]
+DEFAULT_MODEL = MODEL_CHOICES[1]
 DISCORD_BOT_TOKEN = Settings().DISCORD_BOT_TOKEN
 AI_SERVER_URL = Settings().AI_SERVER_URL
 
