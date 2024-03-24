@@ -1,4 +1,4 @@
-FROM python:3.12-alpine as build
+FROM python:3.12 as build
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ COPY src ./src
 RUN poetry install --compile --without dev
 RUN poetry build && poetry run pip install /app/dist/*.whl
 
-FROM python:3.12-alpine as runtime
+FROM python:3.12-slim as runtime
 
 COPY --from=build /app/.venv /app/.venv
 
