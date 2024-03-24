@@ -74,16 +74,6 @@ def parse_pdf(pdf_path: str) -> str:
 
 
 async def _call_llm(model: str, question: str, server_url: str, attach_question_to_message: bool = True) -> list[str]:
-  """
-  Calls the Language Model (LLM) to generate a response based on the given question.
-
-  Args:
-  - model (str): The name of the language model to use.
-  - question (str): The question to be passed to the language model.
-  - server_url (str): The URL of the server hosting the language model.
-  - attach_question (bool, optional): Whether to attach the question to the generated response.
-      Defaults to True.
-  """
   try:
     client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
     response = await client.chat.completions.create(
