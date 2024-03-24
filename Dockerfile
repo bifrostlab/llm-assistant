@@ -10,7 +10,7 @@ ENV POETRY_NO_INTERACTION=1 \
 
 RUN pip install poetry==${POETRY_VERSION}
 
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock README.md ./
 COPY src ./src
 
 RUN poetry install --compile --without dev
