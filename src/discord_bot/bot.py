@@ -1,7 +1,7 @@
 import interactions
 import re
-import llm
-from settings import Settings
+from discord_bot import llm
+from discord_bot.settings import Settings
 
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
