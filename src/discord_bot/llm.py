@@ -6,7 +6,7 @@ by modifying the `base_url`.
 
 import os
 import openai
-import utils.pdf
+from utils import pdf
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
@@ -37,8 +37,8 @@ async def answer_question(model: str, question: str, server_url: str, attach_que
 
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   try:
-    output_path = utils.pdf.download_pdf(url)
-    text = utils.pdf.parse_pdf(output_path)
+    output_path = pdf.download_pdf(url)
+    text = pdf.parse_pdf(output_path)
     os.remove(output_path)
   except Exception as e:
     return split(f"Error in processing PDF: {e}")
