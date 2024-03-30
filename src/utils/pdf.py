@@ -5,28 +5,20 @@ import os
 
 
 def download_pdf(url: str) -> str:
-  try:
-    if not os.path.exists("cache"):
-      os.mkdir("cache")
+  if not os.path.exists("cache"):
+    os.mkdir("cache")
 
-    output_path = f"cache/{time.time()}.pdf"
-    gdown.download(url, output_path, fuzzy=True)
+  output_path = f"cache/{time.time()}.pdf"
+  gdown.download(url, output_path, fuzzy=True)
 
-    return output_path
-
-  except Exception as e:
-    raise RuntimeError(f"Error in downloading PDF: {e}")
+  return output_path
 
 
 def parse_pdf(pdf_path: str) -> str:
-  try:
-    with fitz.open(pdf_path) as pdf:
-      text_list = []
-      for page in pdf:
-        text_list.append(page.get_text())
-      text = "\n\n".join(text_list)
+  with fitz.open(pdf_path) as pdf:
+    text_list = []
+    for page in pdf:
+      text_list.append(page.get_text())
+    text = "\n\n".join(text_list)
 
-    return text
-
-  except Exception as e:
-    raise RuntimeError(f"Error in parsing PDF: {e}")
+  return text

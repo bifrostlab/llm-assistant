@@ -41,7 +41,7 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
     text = utils.pdf.parse_pdf(output_path)
     os.remove(output_path)
   except Exception as e:
-    return split(str(e))
+    return split(f"Error in processing PDF: {e}")
 
   question = (
     "You are a resume reviewer. Your tasks are:\n"
