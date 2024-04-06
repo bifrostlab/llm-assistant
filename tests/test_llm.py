@@ -10,38 +10,36 @@ from unittest.mock import patch
 AI_SERVER_URL = "http://localhost:8000"
 MODEL = "phi"
 dotenv.load_dotenv()
+simple_prompt = "Hello world!"
 
 
 @pytest.mark.asyncio
 async def test_answer_question__LLM_should_response() -> None:
-  prompt = "Respond shortly: hello!"
-  response = await llm.answer_question(MODEL, prompt, AI_SERVER_URL)
+  response = await llm.answer_question(MODEL, simple_prompt, AI_SERVER_URL)
 
   assert not response[0].startswith("Error")
 
 
 @pytest.mark.asyncio
 async def test_answer_question__invalid_model() -> None:
-  bad_model_name = "not-a-gpt"
-  prompt = "Hello, world!"
-  response = await llm.answer_question(bad_model_name, prompt, AI_SERVER_URL)
+  invalid_model = "not-a-gpt"
+  response = await llm.answer_question(invalid_model, simple_prompt, AI_SERVER_URL)
 
   assert response[0].startswith("Error")
 
 
 @pytest.mark.asyncio
 async def test_answer_concurrent_question__should_be_at_the_same_time() -> None:
-  prompt = "Respond shortly: hello"
   n_models = 2
 
   # Get the average time for generating a character in a single run
   start = time.time()
-  out_single = await llm.answer_question(MODEL, prompt, AI_SERVER_URL)
+  out_single = await llm.answer_question(MODEL, simple_prompt, AI_SERVER_URL)
   average_single_time = (time.time() - start) / len(out_single)
 
   # Get the average time for generating a character when running n_models concurrently
   start = time.time()
-  out_concurrent = await _concurrent_call(MODEL, n_models, prompt, AI_SERVER_URL)
+  out_concurrent = await _concurrent_call(MODEL, n_models, simple_prompt, AI_SERVER_URL)
   average_concurrent_time = (time.time() - start) / sum([len(x) for x in out_concurrent])
 
   assert (
