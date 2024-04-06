@@ -6,6 +6,7 @@ by modifying the `base_url`.
 
 import os
 import openai
+import re
 from utils import pdf
 
 MAX_CHARACTERS = 2000
@@ -36,6 +37,10 @@ async def answer_question(model: str, question: str, server_url: str, attach_que
 
 
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
+  # validate url structure, must have leading "http[s]?" and a domain name (e.g. "example.com"=`\w+\.\w+`)
+  if not re.search(r"http[s]?://\w+\.\w+/", url):
+    return split("Invalid URL. Please provide a valid URL of your resume.")
+
   try:
     output_path = pdf.download_pdf(url)
     text = pdf.parse_pdf(output_path)

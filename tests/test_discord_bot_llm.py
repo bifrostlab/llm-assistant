@@ -5,6 +5,7 @@ import pytest
 from discord_bot import llm
 
 AI_SERVER_URL = "http://localhost:8000"
+MODEL = "phi"
 dotenv.load_dotenv()
 
 
@@ -56,3 +57,26 @@ async def _concurrent_call(model: str, n_models: int, prompt: str, server_url: s
 
   out = await asyncio.gather(*asyncMethod)
   return out
+
+
+@pytest.mark.asyncio
+async def test_review_resume__valid_url() -> None:
+  valid_urls = [
+    "https://example.com",
+    "http://example.com/my_resume",
+    "https://drive.google.com/my_resume.pdf",
+    "https://drive.google.com/file/d/R0KJKJKJKJJKJK-aaaaBbb/view?usp=sharing",
+  ]
+
+  for url in valid_urls:
+    response = await llm.review_resume(MODEL, url, AI_SERVER_URL)
+    assert not response[0].startswith("Invalid URL")
+
+
+@pytest.mark.asyncio
+async def test_review_resume__invalid_url() -> None:
+  invalid_urls = ["example.com", "https://example", "https://drive/my_resume.pdf", "some_link"]
+
+  for url in invalid_urls:
+    response = await llm.review_resume(MODEL, url, AI_SERVER_URL)
+    assert response[0].startswith("Invalid URL")
