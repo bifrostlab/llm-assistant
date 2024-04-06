@@ -1,38 +1,14 @@
 # Multifunctional LLM Assistant for Discord
 
-## Dependencies Installation
+This project is a multifunctional assistant bot for Discord. It is designed by VAIT to help our members with various tasks, such as testing LLM models and quickly review our members resume.
 
-We will use [Poetry](https://python-poetry.org/docs/) in this project. Please visit the link to install poetry on your local machine.
+## How to Run this Bot
 
-After successfully installing Poetry, use the following command to install the project dependencies:
-
-```shell
-poetry install
-```
-
-This command will create a Python virtual environment and install all the required dependencies into that environment.
-
-To activate the Python environment, run:
-
-```shell
-poetry shell
-```
-
-When you’re done working in the virtual environment, simply type:
-
-```shell
-exit
-```
-
----
-
-## Discord Bot Development
-
-### Getting started
+### Setting up the bot in Discord
 
 - [Create a bot in discord](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/).
-- Add that bot to a test server.
+- Add that bot to your server.
   - When making the invite through OAuth2 URL Generator, make sure to enable `bot` and `applications.commands` options.
   - Follow the [Invite your bot](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/) section for reference.
 - Copy out `.env.example` into `.env`, and fill in the `DISCORD_BOT_TOKEN` and `DISCORD_GUILD_ID`.
-- Now, run the bot code locally and test the bot on your server.
+- Now, run the bot code locally; alternatively, you can deploy the bot in a docker-compose environment. See the sister repository [deploy-llm-bot](https://github.com/bifrostlab/deploy-llm-bot) for more information.
