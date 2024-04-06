@@ -67,7 +67,7 @@ async def test_review_resume__valid_url() -> None:
 
   for url in valid_urls:
     response = await llm.review_resume(MODEL, url, AI_SERVER_URL)
-    assert not response[0].startswith("Invalid URL")
+    assert not response[0].startswith("Error: Invalid URL")
 
 
 @pytest.mark.asyncio
@@ -76,7 +76,7 @@ async def test_review_resume__invalid_url() -> None:
 
   for url in invalid_urls:
     response = await llm.review_resume(MODEL, url, AI_SERVER_URL)
-    assert response[0].startswith("Invalid URL")
+    assert response[0].startswith("Error: Invalid URL")
 
 
 @pytest.mark.asyncio
