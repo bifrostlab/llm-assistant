@@ -25,7 +25,9 @@ def parse_to_text(pdf_path: str) -> str:
 
 
 def validate_pdf_format(pdf_path: str) -> bool:
-  # Check PDF format from metadata
+  """
+  Validate PDF format from metadata.
+  """
   with open(pdf_path, "rb") as file:
     pdf_metadata = file.read(1024)
     if not pdf_metadata.startswith(b"%PDF"):
