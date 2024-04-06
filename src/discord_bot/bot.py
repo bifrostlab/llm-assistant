@@ -76,7 +76,6 @@ async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
 )
 async def review_resume(ctx: interactions.SlashContext, url: str = "") -> None:
   await ctx.defer()
-
   response = await llm.review_resume(DEFAULT_MODEL, url, AI_SERVER_URL)
   for r in response:
     await ctx.send(r)

@@ -38,15 +38,20 @@ async def answer_question(model: str, question: str, server_url: str, attach_que
 
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   # validate url structure, must have leading "http[s]?" and a domain name (e.g. "example.com"=`\w+\.\w+`)
-  if not re.search(r"http[s]?://\w+\.\w+/", url):
+  if not re.search(r"http[s]?://\w+\.\w+", url):
     return split("Invalid URL. Please provide a valid URL of your resume.")
 
+  output_path = ""
   try:
-    output_path = pdf.download_pdf(url)
-    text = pdf.parse_pdf(output_path)
-    os.remove(output_path)
+    output_path = pdf.download(url)
+    if not pdf.validate_pdf_format(output_path):
+      return split("Error: Invalid PDF format. Please provide a valid PDF file.")
+    text = pdf.parse_to_text(output_path)
   except Exception as e:
     return split(f"Error in processing PDF: {e}")
+  finally:
+    if os.path.exists(output_path):
+      os.remove(output_path)
 
   question = (
     "You are a resume reviewer. Your tasks are:\n"
