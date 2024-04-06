@@ -50,7 +50,7 @@ async def review_resume(model: str, url: str, server_url: str) -> list[str]:
     text = pdf.parse_to_text(output_path)
 
   except Exception as e:
-    messages = llm_response.split(f"Error in processing PDF: {e}")
+    messages = llm_response.split(f"Error: {e}")
     return messages
   finally:
     if os.path.exists(output_path):
