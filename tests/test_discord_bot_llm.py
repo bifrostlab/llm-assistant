@@ -1,5 +1,6 @@
 import asyncio
 import time
+import typing
 import dotenv
 import pytest
 from discord_bot import llm
@@ -85,11 +86,11 @@ async def test_review_resume__invalid_url() -> None:
 
 
 @pytest.mark.asyncio
-@patch('discord_bot.llm.answer_question', return_value=["Mocked answer 1", "Mocked answer 2"])  # Mock answer_question
-async def test_review_resume__call_answer_question_once(mock_answer_question):
+@patch("discord_bot.llm.answer_question", return_value=["Mocked answer 1", "Mocked answer 2"])
+async def test_review_resume__call_answer_question_once(mock_answer_question: typing.Any) -> None:
   url = "https://www.orimi.com/pdf-test.pdf"
 
   messages = await llm.review_resume(MODEL, url, AI_SERVER_URL)
 
-  assert messages == ["Mocked answer 1", "Mocked answer 2"]  # Use the mocked response for assertions
+  assert messages == ["Mocked answer 1", "Mocked answer 2"]
   mock_answer_question.assert_called_once()
