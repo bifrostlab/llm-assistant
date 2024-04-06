@@ -36,19 +36,19 @@ async def answer_question(model: str, question: str, server_url: str, attach_que
 
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   messages: list[str]
-
-  # validate url structure, must have leading "http[s]?" and a domain name (e.g. "example.com"=`\w+\.\w+`)
-  if not re.search(r"http[s]?://\w+\.\w+", url):
-    messages = llm_response.split("Invalid URL. Please provide a valid URL of your resume.")
-    return messages
-
   output_path = ""
+
   try:
+    # validate url structure, must have leading "http[s]?" and a domain name (e.g. "example.com"=`\w+\.\w+`)
+    if not re.search(r"http[s]?://\w+\.\w+", url):
+      raise Exception("Invalid URL. Please provide a valid URL of your resume.")
+
     output_path = pdf.download(url)
     if not pdf.validate_pdf_format(output_path):
-      messages = llm_response.split("Error: Invalid PDF format. Please provide a valid PDF file.")
-      return messages
+      raise Exception("The given file is not in PDF format.")
+
     text = pdf.parse_to_text(output_path)
+
   except Exception as e:
     messages = llm_response.split(f"Error in processing PDF: {e}")
     return messages
