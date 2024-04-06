@@ -4,22 +4,20 @@ through our LiteLLM proxy to interact with Ollama and OpenAI models
 by modifying the `base_url`.
 """
 
+import os
 import openai
+import re
+from utils import pdf
 
 MAX_CHARACTERS = 2000
 QUESTION_CUT_OFF_LENGTH = 150
 RESERVED_SPACE = 50  # for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
 
-async def review_resume(model: str, url: str, server_url: str) -> list[str]:
-  # Download PDF, handle errors
-  # Parse PDF
-  # Send to LLM
-  # Return response
-  return ["NOT IMPLEMENTED YET"]
-
-
-async def answer_question(model: str, question: str, server_url: str) -> list[str]:
+async def answer_question(model: str, question: str, server_url: str, attach_question_to_message: bool = True) -> list[str]:
+  """
+  Calls the LLM model with the specified question and server URL to get the answer.
+  """
   try:
     client = openai.AsyncOpenAI(base_url=server_url, api_key="FAKE")
     response = await client.chat.completions.create(
@@ -29,11 +27,41 @@ async def answer_question(model: str, question: str, server_url: str) -> list[st
     content = response.choices[0].message.content or "No response from the model. Please try again"
     messages = split(content)
     messages = add_number(messages)
-    messages = add_question(messages, question)
+    if attach_question_to_message:
+      messages = add_question(messages, question)
+
     return messages
 
   except Exception as e:
-    return split(f"Error: {e}")
+    return split(f"Error in calling the LLM: {e}")
+
+
+async def review_resume(model: str, url: str, server_url: str) -> list[str]:
+  # validate url structure, must have leading "http[s]?" and a domain name (e.g. "example.com"=`\w+\.\w+`)
+  if not re.search(r"http[s]?://\w+\.\w+", url):
+    return split("Invalid URL. Please provide a valid URL of your resume.")
+
+  output_path = ""
+  try:
+    output_path = pdf.download(url)
+    if not pdf.validate_pdf_format(output_path):
+      return split("Error: Invalid PDF format. Please provide a valid PDF file.")
+    text = pdf.parse_to_text(output_path)
+  except Exception as e:
+    return split(f"Error in processing PDF: {e}")
+  finally:
+    if os.path.exists(output_path):
+      os.remove(output_path)
+
+  question = (
+    "You are a resume reviewer. Your tasks are:\n"
+    + "- Show sentences with incorrect grammars, and suggest a way to correct them.\n"
+    + "- Provide suggestions to improve the resume: \n\n"
+    + f"{text}"
+  )
+
+  messages = await answer_question(model, question, server_url, attach_question_to_message=False)
+  return messages
 
 
 def split(answer: str) -> list[str]:

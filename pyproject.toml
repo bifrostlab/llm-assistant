@@ -12,6 +12,8 @@ openai = "^1.11.1"
 python-dotenv = "^1.0.1"
 discord-py-interactions = "5.11.0"
 pydantic = "^2.6.3"
+gdown = "^5.1.0"
+pymupdf = "^1.24.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.1"
@@ -91,7 +93,7 @@ warn_unused_ignores = true
 
 # Prevent mypy from trigger the missing import error for our written packages
 [[tool.mypy.overrides]]
-module = ["discord_bot.*", "src.discord_bot.*"]
+module = ["discord_bot.*", "utils.*", "fitz.*", "gdown.*"]
 ignore_missing_imports = true
 
 [build-system]

@@ -1,7 +1,6 @@
 import dotenv
 import interactions
 import os
-import re
 
 from discord_bot import llm
 
@@ -76,13 +75,7 @@ async def autocomplete(ctx: interactions.AutocompleteContext) -> None:
   opt_type=interactions.OptionType.STRING,
 )
 async def review_resume(ctx: interactions.SlashContext, url: str = "") -> None:
-  # validate url structure, must have leading "http" and a domain name (e.g. "example.com"=`\w+\.\w+`)
-  if not re.search(r"http.+\w+\.\w+", url):
-    await ctx.send("Invalid URL. Please provide a valid URL of your resume.")
-    return
-
   await ctx.defer()
-
   response = await llm.review_resume(DEFAULT_MODEL, url, AI_SERVER_URL)
   for r in response:
     await ctx.send(r)
