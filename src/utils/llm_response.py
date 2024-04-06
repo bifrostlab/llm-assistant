@@ -31,6 +31,7 @@ def add_question(messages: list[str], questions: str) -> list[str]:
   output: list[str] = [(f"Q: {questions[:QUESTION_CUT_OFF_LENGTH]}\n" + f"A: {message}") for message in messages]
   return output
 
+
 def add_number(messages: list[str]) -> list[str]:
   """
   Add the number to the beginning of each message. E.g. `(1/4)`

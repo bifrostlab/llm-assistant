@@ -33,6 +33,7 @@ async def answer_question(model: str, question: str, server_url: str, attach_que
     messages = llm_response.split(f"Error in calling the LLM: {e}")
     return messages
 
+
 async def review_resume(model: str, url: str, server_url: str) -> list[str]:
   messages: list[str]
 
