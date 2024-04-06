@@ -10,7 +10,7 @@ def split(answer: str) -> list[str]:
   Full sentences are preserved where possible.
   """
   limit = DISCORD_MESSAGE_MAX_CHARACTERS - RESERVED_LENGTH - QUESTION_CUT_OFF_LENGTH
-  messages = []
+  messages: list[str] = []
   answer = answer.strip()
 
   while len(answer) > limit:
@@ -21,7 +21,6 @@ def split(answer: str) -> list[str]:
     answer = answer[last_period + 1 :]
 
   messages.append(answer)
-
   return messages
 
 
@@ -29,8 +28,8 @@ def add_question(messages: list[str], questions: str) -> list[str]:
   """
   Add the asked question to the beginning of each message.
   """
-  return [(f"Q: {questions[:QUESTION_CUT_OFF_LENGTH]}\n" + f"A: {message}") for message in messages]
-
+  output: list[str] = [(f"Q: {questions[:QUESTION_CUT_OFF_LENGTH]}\n" + f"A: {message}") for message in messages]
+  return output
 
 def add_number(messages: list[str]) -> list[str]:
   """
