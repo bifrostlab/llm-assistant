@@ -1,13 +1,16 @@
+import dotenv
 import interactions
+import os
 import re
-from discord_bot import llm
-from discord_bot.settings import Settings
 
+from discord_bot import llm
+
+dotenv.load_dotenv()
 
 MODEL_CHOICES = ["gpt-3.5-turbo", "gpt-4", "phi"]
-DEFAULT_MODEL = MODEL_CHOICES[2]
-DISCORD_BOT_TOKEN = Settings().DISCORD_BOT_TOKEN
-AI_SERVER_URL = Settings().AI_SERVER_URL
+DEFAULT_MODEL = os.environ.get("LLM_DEFAULT_MODEL", "phi")
+DISCORD_BOT_TOKEN = os.environ["DISCORD_BOT_TOKEN"]
+AI_SERVER_URL = os.environ["AI_SERVER_URL"]
 
 bot = interactions.Client(intents=interactions.Intents.DEFAULT)
 
