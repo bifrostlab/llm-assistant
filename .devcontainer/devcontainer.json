@@ -1,21 +1,20 @@
 {
-  "name": "Python 3.12",
+  "name": "TypeScript + NodeJS + PNPM",
   "image": "ghcr.io/bifrostlab/llm-assistant/devcontainer:latest",
   "customizations": {
     "vscode": {
       "settings": {
-        "python.analysis.typeCheckingMode": "basic",
-        "python.analysis.autoImportCompletions": true,
-        "python.editor.formatOnSave": true,
-        "python.editor.defaultFormatter": "charliermarsh.ruff"
+        "editor.formatOnSave": true
       },
       "extensions": [
+        "biomejs.biome",
         "GitHub.vscode-github-actions",
         "GitHub.copilot",
-        "charliermarsh.ruff",
-        "elagil.pre-commit-helper",
         "EditorConfig.EditorConfig",
-        "ms-python.mypy-type-checker"
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
+        "vitest.explorer",
+        "yoavbls.pretty-ts-errors"
       ]
     }
   },
