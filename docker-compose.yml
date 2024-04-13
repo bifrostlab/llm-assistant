@@ -1,0 +1,10 @@
+services:
+  bot:
+    build:
+      target: production
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    env_file: ".env.production"
+    image: ghcr.io/bifrostlab/llm-assistant-bot:production
+    container_name: llm_assistant_prod

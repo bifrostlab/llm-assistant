@@ -1,0 +1,34 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "include": ["*.setup.*", "*.config.*", "src/**", "bin/**", "scripts/**", "mocks/**", "playgrounds/**", "**/*.json", "**/*.md", "**/*.yaml", "**/*.yml"],
+    "ignore": ["node_modules", "dist", "coverage"]
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 160,
+    "ignore": []
+  },
+  "javascript": {
+    "formatter": {
+      "trailingComma": "es5",
+      "semicolons": "always",
+      "quoteProperties": "asNeeded",
+      "quoteStyle": "single",
+      "arrowParentheses": "always",
+      "jsxQuoteStyle": "double"
+    }
+  }
+}
