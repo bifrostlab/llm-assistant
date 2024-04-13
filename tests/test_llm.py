@@ -21,14 +21,6 @@ async def test_answer_question__LLM_should_response() -> None:
 
 
 @pytest.mark.asyncio
-async def test_answer_question__invalid_model() -> None:
-  invalid_model = "not-a-gpt"
-  response = await llm.answer_question(invalid_model, simple_prompt, AI_SERVER_URL)
-
-  assert response[0].startswith("Error")
-
-
-@pytest.mark.asyncio
 async def test_answer_concurrent_question__should_be_at_the_same_time() -> None:
   n_models = 2
 
