@@ -3,7 +3,7 @@ import { Result } from 'oxide.ts';
 import { selectModelAutocomplete } from '../../autocompletes/select-model/autocomplete';
 import { askQuestion, findModel } from '../../llm/utils';
 import { logger } from '../../utils/logger';
-import type { Command, CommandHandler } from '../builder';
+import type { SlashCommand, SlashCommandHandler } from '../builder';
 
 const data = new SlashCommandBuilder()
   .setName('ask')
@@ -11,7 +11,7 @@ const data = new SlashCommandBuilder()
   .addStringOption((option) => option.setName('model').setDescription('Choose an LLM model').setRequired(true).setAutocomplete(true))
   .addStringOption((option) => option.setName('question').setDescription('Enter your prompt').setRequired(true).setMinLength(10));
 
-export const execute: CommandHandler = async (interaction) => {
+export const execute: SlashCommandHandler = async (interaction) => {
   const model = interaction.options.getString('model', true).trim().toLowerCase();
   const question = interaction.options.getString('question', true).trim();
   logger.info(`[ask]: Asking ${model} model with prompt: ${question}`);
@@ -33,7 +33,7 @@ export const execute: CommandHandler = async (interaction) => {
   }, Promise.resolve(undefined));
 };
 
-const command: Command = {
+const command: SlashCommand = {
   data,
   execute,
   autocomplete: selectModelAutocomplete,

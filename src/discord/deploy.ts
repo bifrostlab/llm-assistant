@@ -1,6 +1,6 @@
 import { REST, type RequestData, type RouteLike } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v10';
-import type { Command } from '../slash-commands/builder';
+import type { SlashCommand } from '../slash-commands/builder';
 
 interface DiscordRequestConfig {
   token: string;
@@ -19,7 +19,7 @@ async function registerCommands({ request, token, body }: DiscordRequestPayload)
   return rest.put(request, { body });
 }
 
-export async function deployGuildCommands(commandList: Command[], config: DiscordRequestConfig): Promise<unknown> {
+export async function deployGuildCommands(commandList: SlashCommand[], config: DiscordRequestConfig): Promise<unknown> {
   const { token, clientId, guildId } = config;
 
   const commands = commandList.map((cmd) => cmd.data.toJSON());
@@ -28,7 +28,7 @@ export async function deployGuildCommands(commandList: Command[], config: Discor
   return registerCommands({ request, token, body: commands });
 }
 
-export async function deployGlobalCommands(commandList: Command[], config: Omit<DiscordRequestConfig, 'guildId'>): Promise<unknown> {
+export async function deployGlobalCommands(commandList: SlashCommand[], config: Omit<DiscordRequestConfig, 'guildId'>): Promise<unknown> {
   const { token, clientId } = config;
 
   const commands = commandList.map((cmd) => cmd.data.toJSON());
