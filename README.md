@@ -1,6 +1,6 @@
 # Multifunctional LLM Assistant for Discord
 
-This project is a multifunctional assistant bot for Discord. It is designed by VAIT to help our members with various tasks, such as asking LLM models and quickly reviewing our members resume.
+This project is a multifunctional assistant bot for Discord. It is designed by VAIT to help our members with various tasks, such as answering questions and quickly reviewing our members' resumes.
 
 Project is bootstrapped with [ts-starter-template](https://github.com/samhwang/ts-starter-template)
 
