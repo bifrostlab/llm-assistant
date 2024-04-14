@@ -22,24 +22,8 @@ Project is bootstrapped with [ts-starter-template](https://github.com/samhwang/t
   - `AI_SERVER_URL`: The URL of the LiteLLM Proxy server.
 - Now, run the bot code locally; alternatively, you can deploy the bot in a docker-compose environment. See the sister repository [deploy-llm-bot](https://github.com/bifrostlab/deploy-llm-bot) for more information.
 
-## Prerequisite
+---
 
-### To run the bot
+## Developers Guide
 
-- Node 20
-- PNPM 8
-
-### To run the local LLM server (optional)
-
-- Python 3.12
-- Poetry 3.9
-- Ollama
-
-## Available scripts
-
-```shell
-pnpm run start
-pnpm run test
-pnpm run format
-pnpm run build
-```
+Go to [DEV_GUIDE.md](./.github/DEV_GUIDE.md) for more details.
