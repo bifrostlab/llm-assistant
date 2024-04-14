@@ -1,0 +1,38 @@
+node_modules
+
+.DS_Store
+*.local
+
+# Test Coverage
+coverage
+
+# Build output
+dist
+
+# Env
+.env*
+
+# Log & README
+*.log
+*.md
+*.MD
+
+# OS Specific
+Thumbs.db
+.DS_Store
+
+# Docker
+docker-compose.*
+Dockerfile
+
+# Misc
+LICENSE
+.github
+.idea
+.vscode
+.devcontainer
+
+# Not needed for prod
+litellm
+scripts
+playgrounds

@@ -1,0 +1,3 @@
+pnpm run ci
+pnpm run test
+pnpm run typecheck

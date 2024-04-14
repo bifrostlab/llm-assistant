@@ -1,25 +1,29 @@
-FROM python:3.12 as build
-
+################
+# Build assets #
+################
+FROM node:20.10 as build
 WORKDIR /app
 
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache \
-    POETRY_VERSION=1.7.1
+# Install global node modules: pnpm
+RUN npm install -g pnpm@8.15
 
-RUN pip install poetry==${POETRY_VERSION}
+# Install Node modules
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
-COPY pyproject.toml poetry.lock README.md ./
-COPY src ./src
+COPY . .
 
-RUN poetry install --compile --without dev
-RUN poetry build && poetry run pip install /app/dist/*.whl
+ENV NODE_ENV=production
+RUN pnpm build
 
-FROM python:3.12-slim as runtime
+####################
+# Production image #
+####################
+FROM node:20.10-slim as production
+WORKDIR /app
 
-COPY --from=build /app/.venv /app/.venv
+COPY --chown=node:node --from=build /app/dist dist
 
-ENV PATH="/app/.venv/bin:$PATH"
-
-CMD ["llm-bot"]
+USER node
+ENV NODE_ENV=production
+CMD ["--enable-source-maps", "dist/index.js"]
