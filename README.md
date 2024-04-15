@@ -8,33 +8,22 @@ Project is bootstrapped with [ts-starter-template](https://github.com/samhwang/t
 
 ### Setting up the bot in Discord
 
-- [Create a bot in discord](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/).
+- [Create a bot in discord](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot).
 - Add that bot to your server.
-  - When making the invite through OAuth2 URL Generator, make sure to enable 
+  - When making the invite through OAuth2 URL Generator, make sure to enable
     - `bot` and `applications.commands` options
-    - all `Privileged Gateway Intents` options
-  - Follow the [Invite your bot](https://interactions-py.github.io/interactions.py/Guides/02%20Creating%20Your%20Bot/) section for reference.
+    - `Privileged Gateway Intents => Message Content Intent` options
+  - Follow the [Invite your bot](https://discordjs.guide/preparations/adding-your-bot-to-servers.html) section for reference.
 - Copy out `.env.example` into `.env`, and fill in the environment variables.
+  - `GUILD_ID`: Your server ID. Right-click on the server title and select "Copy ID" to get the `GUILD ID`. **Development purposes only.**
+  - `TOKEN`: Your bot token. Taken from the Discord Developer Portal => Bot section.
+  - `PUBLIC_KEY`: Your bot public key. Taken from the Discord Developer Portal => General Information section.
+  - `CLIENT_ID`: Your bot client ID. Taken from the Discord Developer Portal => OAuth2 section.
+  - `AI_SERVER_URL`: The URL of the LiteLLM Proxy server.
 - Now, run the bot code locally; alternatively, you can deploy the bot in a docker-compose environment. See the sister repository [deploy-llm-bot](https://github.com/bifrostlab/deploy-llm-bot) for more information.
 
-## Prerequisite
+---
 
-### To run the bot
+## Developers Guide
 
-- Node 20
-- PNPM 8
-
-### To run the local LLM server (optional)
-
-- Python 3.12
-- Poetry 3.9
-- Ollama
-
-## Available scripts
-
-```shell
-pnpm run start
-pnpm run test
-pnpm run format
-pnpm run build
-```
+Go to [DEV_GUIDE.md](./.github/DEV_GUIDE.md) for more details.
