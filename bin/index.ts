@@ -3,6 +3,7 @@ import { Result } from 'oxide.ts';
 import { commands } from '../src/commands';
 import { getClient as getDiscordClient } from '../src/discord/client';
 import { deployGlobalCommands } from '../src/discord/deploy';
+import { isProduction } from '../src/utils/is-production';
 import { loadEnv } from '../src/utils/load-env';
 import { logger } from '../src/utils/logger';
 
@@ -15,7 +16,7 @@ async function main(): Promise<void> {
   if (!client.user) throw new Error('Something went wrong!');
   logger.info(`[main]: Logged in as ${client.user.tag}!`);
 
-  if (process.env.NODE_ENV === 'production') {
+  if (isProduction()) {
     // This should only be run once during the bot startup in production.
     // For development usage, please use `pnpm deploy:command`
     logger.info('[main]: Deploying global commands');
