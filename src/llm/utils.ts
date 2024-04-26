@@ -6,7 +6,7 @@ const DISCORD_MESSAGE_MAX_CHARACTERS = 2000;
 const QUESTION_CUT_OFF_LENGTH = 150;
 const RESERVED_LENGTH = 50; // for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
-const SUPPORTED_MODELS = ['gpt-3.5-turbo', 'gpt-4', 'phi', 'tinydolphin'] as const;
+const SUPPORTED_MODELS = ['gpt-3.5-turbo', 'gpt-4', 'phi', 'phỉ', 'tinydolphin', 'mistral', 'mixtral', 'llama3', 'llama3-70b'] as const;
 type SupportedModel = (typeof SUPPORTED_MODELS)[number];
 export const SUPPORTED_MODELS_MAP = SUPPORTED_MODELS.map((model) => ({
   name: model,
