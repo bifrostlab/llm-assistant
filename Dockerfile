@@ -14,7 +14,8 @@ RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY . .
 
 ENV NODE_ENV=production
-RUN pnpm build
+RUN pnpm build && \
+    pnpm install --production --frozen-lockfile --ignore-scripts
 
 ####################
 # Production image #
@@ -23,6 +24,7 @@ FROM node:20.10-slim as production
 WORKDIR /app
 
 COPY --chown=node:node --from=build /app/dist dist
+COPY --chown=node:node --from=build /app/node_modules node_modules
 
 USER node
 ENV NODE_ENV=production
