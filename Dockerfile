@@ -1,11 +1,11 @@
 ################
 # Build assets #
 ################
-FROM node:20.10 as build
+FROM node:20.12 as build
 WORKDIR /app
 
 # Install global node modules: pnpm
-RUN npm install -g pnpm@8.15
+RUN npm install -g pnpm@9.0
 
 # Install Node modules
 COPY package.json pnpm-lock.yaml ./
@@ -20,7 +20,7 @@ RUN pnpm build && \
 ####################
 # Production image #
 ####################
-FROM node:20.10-slim as production
+FROM node:20.12-slim as production
 WORKDIR /app
 
 COPY --chown=node:node --from=build /app/dist dist
