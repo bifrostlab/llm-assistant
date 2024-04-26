@@ -3,13 +3,13 @@ import type { AutocompleteHandler } from '../autocompletes/builder';
 
 export type SlashCommandHandler = (interaction: ChatInputCommandInteraction) => Promise<void>;
 
-export interface SlashCommand {
+export type SlashCommand = {
   data: Omit<SlashCommandBuilder, 'addSubcommandGroup' | 'addSubcommand'> | SlashCommandSubcommandsOnlyBuilder;
   execute: SlashCommandHandler;
   autocomplete?: AutocompleteHandler;
-}
+};
 
-export interface Subcommand {
+export type Subcommand = {
   data: SlashCommandSubcommandBuilder | ((subcommandGroup: SlashCommandSubcommandBuilder) => SlashCommandSubcommandBuilder);
   execute: SlashCommandHandler;
-}
+};

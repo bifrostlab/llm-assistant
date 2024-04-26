@@ -10,4 +10,5 @@ coverage
 dist
 
 # Env
-.env
+.env*
+!.env.sample
