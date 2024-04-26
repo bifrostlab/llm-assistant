@@ -7,7 +7,7 @@
 - Node 20
   - Can be installed via [source](https://nodejs.org/en/download)
   - Or via [nvm](https://github.com/nvm-sh/nvm) / [fnm](https://github.com/Schniz/fnm)
-- [PNPM 8](https://pnpm.io/installation)
+- [PNPM 9](https://pnpm.io/installation)
   - Can be installed as a standalone
   - Or via NPM (recommended): `npm --global install pnpm`
 
