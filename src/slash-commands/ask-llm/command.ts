@@ -12,6 +12,7 @@ const data = new SlashCommandBuilder()
   .addStringOption((option) => option.setName('question').setDescription('Enter your prompt').setRequired(true).setMinLength(10));
 
 export const execute: SlashCommandHandler = async (interaction) => {
+  await interaction.deferReply();
   const model = interaction.options.getString('model', true).trim().toLowerCase();
   const question = interaction.options.getString('question', true).trim();
   logger.info(`[ask]: Asking ${model} model with prompt: ${question}`);
@@ -19,16 +20,23 @@ export const execute: SlashCommandHandler = async (interaction) => {
   const findModelOp = Result.safe(() => findModel(model));
   if (findModelOp.isErr()) {
     logger.info(`[ask]: Invalid model ${model}`);
-    interaction.reply('Invalid model. Please choose from the available models.');
+    interaction.editReply('Invalid model. Please choose from the available models.');
     return;
   }
   const supportedModel = findModelOp.unwrap();
 
+  logger.info(`[ask]: Asking LLM with prompt: ${question}`);
   const answers = await askQuestion(supportedModel, question);
-  logger.info('[ask]: Got response from LLM', data);
-  await answers.reduce(async (accum, chunk) => {
+
+  logger.info('[ask]: Got response from LLM. Sending to client.', data);
+  await answers.reduce(async (accum, chunk, index) => {
     await accum;
-    await interaction.reply(chunk);
+    if (index === 0) {
+      await interaction.editReply(chunk);
+      return undefined;
+    }
+
+    await interaction.followUp(chunk);
     return undefined;
   }, Promise.resolve(undefined));
 };
