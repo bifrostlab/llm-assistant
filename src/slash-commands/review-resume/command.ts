@@ -15,6 +15,7 @@ const data = new SlashCommandBuilder()
   .addStringOption((option) => option.setName('url').setDescription('PDF or Google Drive URL').setRequired(true));
 
 export const execute: SlashCommandHandler = async (interaction) => {
+  await interaction.deferReply();
   const model = interaction.options.getString('model', true).trim().toLowerCase();
   const url = interaction.options.getString('url', true);
   logger.info(`[review-resume]: Reviewing resume from URL: ${url}`);
@@ -22,7 +23,7 @@ export const execute: SlashCommandHandler = async (interaction) => {
   const findModelOp = Result.safe(() => findModel(model));
   if (findModelOp.isErr()) {
     logger.info(`[ask]: Invalid model ${model}`);
-    interaction.reply('Invalid model. Please choose from the available models.');
+    interaction.editReply('Invalid model. Please choose from the available models.');
     return;
   }
   const supportedModel = findModelOp.unwrap();
@@ -30,7 +31,7 @@ export const execute: SlashCommandHandler = async (interaction) => {
   const validURL = PDFURL.safeParse(url);
   if (!validURL.success) {
     logger.info(`[review-resume]: Invalid URL ${url}`);
-    await interaction.reply('Invalid URL. The URL must end with `.pdf` or must be valid Google Drive URL.');
+    await interaction.editReply('Invalid URL. The URL must end with `.pdf` or must be valid Google Drive URL.');
     return;
   }
 
@@ -39,7 +40,7 @@ export const execute: SlashCommandHandler = async (interaction) => {
   if (downloadOp.isErr()) {
     logger.error(`[review-resume]: Error downloading file: ${downloadOp.unwrapErr().message}`);
     cleanup(filename);
-    await interaction.reply('Error downloading resume. Please try again later.');
+    await interaction.editReply('Error downloading resume. Please try again later.');
     return;
   }
 
@@ -47,7 +48,7 @@ export const execute: SlashCommandHandler = async (interaction) => {
   if (readOp.isErr()) {
     logger.error(`[review-resume]: Error reading file: ${readOp.unwrapErr().message}`);
     cleanup(filename);
-    await interaction.reply('Error reading resume. Please try again later.');
+    await interaction.editReply('Error reading resume. Please try again later.');
     return;
   }
 
@@ -60,13 +61,15 @@ export const execute: SlashCommandHandler = async (interaction) => {
 
 ${doc}
 `;
+  logger.info('[review-resume]: Sending review resume request to LLM.');
   const answers = await askQuestion(supportedModel, question, false);
-  logger.info('[review-resume]: Got response from LLM', data);
-  await answers.reduce(async (accum, chunk) => {
-    await accum;
-    await interaction.reply(chunk);
-    return undefined;
-  }, Promise.resolve(undefined));
+
+  logger.info('[review-resume]: Got response from LLM. Sending to client', answers);
+  const [firstChunk, ...chunks] = answers;
+  await interaction.editReply(firstChunk);
+  for await (const chunk of chunks) {
+    interaction.followUp(chunk);
+  }
 };
 
 const command: SlashCommand = {

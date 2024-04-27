@@ -39,11 +39,11 @@ describe('ask command', () => {
             throw new Error('Invalid');
         }
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Invalid model');
     });
 
@@ -61,11 +61,11 @@ describe('ask command', () => {
         }
       });
       mockChatCompletions.mockRejectedValueOnce(new Error('Synthetic Error.'));
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Error in asking the LLM');
     });
 
@@ -98,11 +98,11 @@ describe('ask command', () => {
           },
         ] as ChatCompletion.Choice[],
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('No response');
     });
 
@@ -136,11 +136,11 @@ describe('ask command', () => {
           },
         ] as ChatCompletion.Choice[],
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain(`Q: asdf1234\nA: ${mockAnswer}`);
     });
   });

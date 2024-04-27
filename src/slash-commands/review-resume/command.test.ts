@@ -42,11 +42,11 @@ describe('review resume command', () => {
             throw new Error('Invalid');
         }
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Invalid model');
     });
 
@@ -63,11 +63,11 @@ describe('review resume command', () => {
             throw new Error('Invalid');
         }
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Invalid URL');
     });
 
@@ -84,11 +84,11 @@ describe('review resume command', () => {
             throw new Error('Invalid');
         }
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Error downloading resume');
     });
 
@@ -105,11 +105,11 @@ describe('review resume command', () => {
             throw new Error('Invalid');
         }
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Error downloading resume');
     });
 
@@ -127,11 +127,11 @@ describe('review resume command', () => {
         }
       });
       readerSpy.mockRejectedValueOnce(new Error('Synthetic Error.'));
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Error reading resume');
     });
 
@@ -149,11 +149,11 @@ describe('review resume command', () => {
         }
       });
       mockChatCompletions.mockRejectedValueOnce(new Error('Synthetic Error.'));
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('Error in asking the LLM');
     });
 
@@ -186,11 +186,11 @@ describe('review resume command', () => {
           },
         ] as ChatCompletion.Choice[],
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain('No response');
     });
 
@@ -224,11 +224,11 @@ describe('review resume command', () => {
           },
         ] as ChatCompletion.Choice[],
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain(`${mockAnswer}`);
     });
 
@@ -262,11 +262,11 @@ describe('review resume command', () => {
           },
         ] as ChatCompletion.Choice[],
       });
-      const respondInput = captor<Parameters<ChatInputCommandInteraction['reply']>['0']>();
+      const respondInput = captor<Parameters<ChatInputCommandInteraction['editReply']>['0']>();
 
       await execute(mockChatInputInteraction);
 
-      expect(mockChatInputInteraction.reply).toBeCalledWith(respondInput);
+      expect(mockChatInputInteraction.editReply).toBeCalledWith(respondInput);
       expect(respondInput.value).toContain(`${mockAnswer}`);
     });
   });
