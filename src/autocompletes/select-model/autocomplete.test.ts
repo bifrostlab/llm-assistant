@@ -34,6 +34,10 @@ describe('autocomplete', () => {
         "value": "phi",
       },
       {
+        "name": "phi3",
+        "value": "phi3",
+      },
+      {
         "name": "tinydolphin",
         "value": "tinydolphin",
       },
