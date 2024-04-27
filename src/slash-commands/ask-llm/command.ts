@@ -28,17 +28,12 @@ export const execute: SlashCommandHandler = async (interaction) => {
   logger.info(`[ask]: Asking LLM with prompt: ${question}`);
   const answers = await askQuestion(supportedModel, question);
 
-  logger.info('[ask]: Got response from LLM. Sending to client.', data);
-  await answers.reduce(async (accum, chunk, index) => {
-    await accum;
-    if (index === 0) {
-      await interaction.editReply(chunk);
-      return undefined;
-    }
-
-    await interaction.followUp(chunk);
-    return undefined;
-  }, Promise.resolve(undefined));
+  logger.info('[ask]: Got response from LLM. Sending to client.', answers);
+  const [firstChunk, ...chunks] = answers;
+  await interaction.editReply(firstChunk);
+  for await (const chunk of chunks) {
+    interaction.followUp(chunk);
+  }
 };
 
 const command: SlashCommand = {

@@ -64,17 +64,12 @@ ${doc}
   logger.info('[review-resume]: Sending review resume request to LLM.');
   const answers = await askQuestion(supportedModel, question, false);
 
-  logger.info('[review-resume]: Got response from LLM. Sending to client', data);
-  await answers.reduce(async (accum, chunk, index) => {
-    await accum;
-    if (index === 0) {
-      await interaction.editReply(chunk);
-      return undefined;
-    }
-
-    await interaction.followUp(chunk);
-    return undefined;
-  }, Promise.resolve(undefined));
+  logger.info('[review-resume]: Got response from LLM. Sending to client', answers);
+  const [firstChunk, ...chunks] = answers;
+  await interaction.editReply(firstChunk);
+  for await (const chunk of chunks) {
+    interaction.followUp(chunk);
+  }
 };
 
 const command: SlashCommand = {
