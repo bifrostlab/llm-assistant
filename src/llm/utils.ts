@@ -1,4 +1,5 @@
 import { Result } from 'oxide.ts';
+import { z } from 'zod';
 import { logger } from '../utils/logger';
 import { getClient } from './client';
 
@@ -6,9 +7,9 @@ const DISCORD_MESSAGE_MAX_CHARACTERS = 2000;
 const QUESTION_CUT_OFF_LENGTH = 150;
 const RESERVED_LENGTH = 50; // for other additional strings. E.g. number `(1/4)`, `Q: `, `A: `, etc.
 
-const SUPPORTED_MODELS = ['gpt-3.5-turbo', 'gpt-4', 'phi', 'phi3', 'tinydolphin', 'mistral', 'mixtral', 'llama3', 'llama3-70b'] as const;
-type SupportedModel = (typeof SUPPORTED_MODELS)[number];
-export const SUPPORTED_MODELS_MAP = SUPPORTED_MODELS.map((model) => ({
+export const SupportedModel = z.enum(['gpt-3.5-turbo', 'gpt-4', 'phi', 'phi3', 'tinydolphin', 'mistral', 'mixtral', 'llama3', 'llama3-70b']);
+export type SupportedModel = z.infer<typeof SupportedModel>;
+export const SUPPORTED_MODELS_MAP = SupportedModel.options.map((model) => ({
   name: model,
   value: model,
 }));
@@ -84,10 +85,10 @@ function addNumber(chunks: string[]): string[] {
   return output;
 }
 
-export function findModel(model: string): SupportedModel {
-  const hasModel = SUPPORTED_MODELS.find((option) => option.toLowerCase() === model);
-  if (!hasModel) {
-    throw new Error(`Model ${model} is not supported. Supported models are: ${SUPPORTED_MODELS.join(', ')}`);
+export function findModel(input: string): SupportedModel {
+  const model = SupportedModel.safeParse(input);
+  if (!model.success) {
+    throw new Error(`Model ${input} is not supported. Supported models are: ${SupportedModel.options.join(', ')}`);
   }
-  return model as SupportedModel;
+  return model.data;
 }

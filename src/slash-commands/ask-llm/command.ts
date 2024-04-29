@@ -8,12 +8,12 @@ import type { SlashCommand, SlashCommandHandler } from '../builder';
 const data = new SlashCommandBuilder()
   .setName('ask')
   .setDescription('Ask an LLM to answer anything')
-  .addStringOption((option) => option.setName('model').setDescription('Choose an LLM model').setRequired(true).setAutocomplete(true))
+  .addStringOption((option) => option.setName('model').setDescription('Choose an LLM model').setRequired(false).setAutocomplete(true))
   .addStringOption((option) => option.setName('question').setDescription('Enter your prompt').setRequired(true).setMinLength(10));
 
 export const execute: SlashCommandHandler = async (interaction) => {
   await interaction.deferReply();
-  const model = interaction.options.getString('model', true).trim().toLowerCase();
+  const model = (interaction.options.getString('model', false) || process.env.DEFAULT_MODEL).trim().toLowerCase();
   const question = interaction.options.getString('question', true).trim();
   logger.info(`[ask]: Asking ${model} model with prompt: ${question}`);
 

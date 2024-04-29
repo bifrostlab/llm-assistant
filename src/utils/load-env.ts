@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { z } from 'zod';
+import { SupportedModel } from '../llm/utils';
 import { logger } from './logger';
 
 const configSchema = z.object({
@@ -10,8 +11,9 @@ const configSchema = z.object({
   CLIENT_ID: z.string(),
   GUILD_ID: z.string().optional(),
 
-  // AI Server URL
+  // AI Server config
   AI_SERVER_URL: z.string().url(),
+  DEFAULT_MODEL: SupportedModel,
 });
 type ConfigSchema = z.infer<typeof configSchema>;
 
