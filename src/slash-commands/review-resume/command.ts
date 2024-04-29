@@ -11,12 +11,12 @@ import { getOutputFileName } from './utils';
 const data = new SlashCommandBuilder()
   .setName('review-resume')
   .setDescription('Review a resume from a generic PDF URL or Google Drive')
-  .addStringOption((option) => option.setName('model').setDescription('Choose an LLM model').setRequired(true).setAutocomplete(true))
+  .addStringOption((option) => option.setName('model').setDescription('Choose an LLM model').setRequired(false).setAutocomplete(true))
   .addStringOption((option) => option.setName('url').setDescription('PDF or Google Drive URL').setRequired(true));
 
 export const execute: SlashCommandHandler = async (interaction) => {
   await interaction.deferReply();
-  const model = interaction.options.getString('model', true).trim().toLowerCase();
+  const model = (interaction.options.getString('model', false) || process.env.DEFAULT_MODEL).trim().toLowerCase();
   const url = interaction.options.getString('url', true);
   logger.info(`[review-resume]: Reviewing resume from URL: ${url}`);
 
