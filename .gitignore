@@ -11,4 +11,4 @@ dist
 
 # Env
 .env*
-!.env.sample
+!.env.example
